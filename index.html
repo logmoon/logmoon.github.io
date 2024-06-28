@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title></title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects_index1.html">Projects</a>
+                <a href="skillset.html">Skillset</a>
+                <a href="blogs_index1.html">Blogs</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<section>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to <span class="accent-color">log.moon</span></h1>
+            <p>Explore my projects, read my blogs, and get to know more about my work.</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2>About Me</h2>
+        <p>Hi, my name is Amen Allah, I'm a passionate game developer and soon to be engineer. I love creating games, worlds and telling stories. Welcome to my personal space where I showcase my work and thoughts.</p>
+        <p>Check out my <a href="skillset.html">My Full Skillset</a> for more info. Or contact me <a href="index.html#contact">here.</a></p>
+    </section>
+
+    
+    <section id="featured" class="featured-section">
+        <h2>Featured Projects</h2>
+        <div class="card-container">
+        
+        <a class="card" href="Immersive Sim.html" style="background-image: url('assets/images/projects/immersive_sim/main.gif');">
+            <div class="card-content">
+                <h3>Immersive Sim in Godot</h3>
+                <p>3D Game</p>
+            </div>
+        </a>
+        
+        <a class="card" href="Stock Boy.html" style="background-image: url('assets/images/projects/stock_boy/main4.gif');">
+            <div class="card-content">
+                <h3>Stock Boy</h3>
+                <p>2D Game</p>
+            </div>
+        </a>
+        
+        <a class="card" href="The Creature Said Deeper.html" style="background-image: url('assets/images/projects/the_creature_said_deeper/main.gif');">
+            <div class="card-content">
+                <h3>The Creature Said Deeper</h3>
+                <p>2D Game</p>
+            </div>
+        </a>
+        
+        <a class="card" href="The Lost Hope.html" style="background-image: url('assets/images/projects/the_lost_hope/main.gif');">
+            <div class="card-content">
+                <h3>The Lost Hope (Monogame Version)</h3>
+                <p>2D Game</p>
+            </div>
+        </a>
+        
+        </div>
+    </section>
+    
+
+    
+
+    <section id="contact" class="contact-section">
+        <h2>Contact</h2>
+        <p>Feel free to reach out or explore more of my work here:</p>
+        <div class="social-media">
+            <a href="https://logmoon.itch.io/"><img src="assets/images/socials/itch.png" alt="Itch.io" width="40" height="40"></a>
+            <a href="https://github.com/logmoon"><img src="assets/images/socials/github.png" alt="Github" width="40" height="40"></a>
+            <a href="https://www.fiverr.com/usecondomskid"><img src="assets/images/socials/fiverr.png" alt="Fiverr" width="40" height="40"></a>
+            <a href="https://www.linkedin.com/in/amen-allah-ben-aissa-b92221233/"><img src="assets/images/socials/linkedin.png" alt="Linkedin" width="40" height="40"></a>
+            <a href="https://www.youtube.com/channel/UCAzm3fEqGQF6KsYdpLCLLbQ"><img src="assets/images/socials/youtube.png" alt="Youtube" width="40" height="40"></a>
+            <a href="https://x.com/logmoon_"><img src="assets/images/socials/twitter.png" alt="X" width="40" height="40"></a>
+        </div>
+        <p>You can also email me at: <b>amen.benaissa09@gmail.com</b></p>
+    </section>
+    
+</section>
+
+        </main>
+        <footer>
+            <p>&copy; 2024 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterArticlesByTag() {
+            let searchInput = document.getElementById('search-bar').value.toLowerCase();
+            let blogContainers = document.querySelectorAll('.article-tag');
+            let searchResults = document.getElementById('search-results');
+            let blogsByTag = document.getElementById('articles-by-tag');
+            searchResults.innerHTML = '';
+
+            let found = false;
+
+            blogContainers.forEach(container => {
+                let tag = container.getAttribute('data-tag').toLowerCase();
+                if (tag.includes(searchInput)) {
+                    container.style.display = 'flex';
+                    found = true;
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            if (searchInput === '') {
+                searchResults.innerHTML = '';
+                blogsByTag.style.display = 'block';
+            } else {
+                blogContainers.forEach(container => {
+                    if (container.style.display === 'flex') {
+                        let tagHeader = document.createElement('h3');
+                        tagHeader.textContent = container.getAttribute('data-tag');
+                        searchResults.appendChild(tagHeader);
+                        container.querySelectorAll('.card').forEach(card => {
+                            searchResults.appendChild(card.cloneNode(true));
+                        });
+                    }
+                });
+
+                if (found) {
+                    blogsByTag.style.display = 'none';
+                } else {
+                    searchResults.innerHTML = '<p>Nothing found for the given tag.</p>';
+                    blogsByTag.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

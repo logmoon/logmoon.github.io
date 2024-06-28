@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Immersive Sim in Godot</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects_index1.html">Projects</a>
+                <a href="skillset.html">Skillset</a>
+                <a href="blogs_index1.html">Blogs</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article class="project-body" background-image: >
+    <h2>Immersive Sim in Godot</h2>
+    <div class="tags">
+        
+            <a class="tag" href="projects_index1.html#3D Game">3D Game</a>
+        
+            <a class="tag" href="projects_index1.html#Godot">Godot</a>
+        
+            <a class="tag" href="projects_index1.html#Unity">Unity</a>
+        
+            <a class="tag" href="projects_index1.html#TrenchBroom">TrenchBroom</a>
+        
+    </div>
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <a href="https://logmoon.itch.io/immersive-sim-in-godot-4">Itch (Play it)</a>
+        
+    </div>
+    <hr>
+    <h1>Project Description</h1>
+<p>I wanted to try <a href="https://godotengine.org/">Godot 4</a>, and I was inspired by retro fps games like Doom, and the immersive sim genre.</p>
+<p>And so, I made this. Currently it's nowhere near an immersive sim.
+But it was a good way to learn Godot. And I have to say, I really liked it!</p>
+<h2>3D to 2D Pipeline</h2>
+<p>I created a little 3D to 2D exporter for this game using <a href="https://unity.com/">Unity</a>.</p>
+<p>it takes in a 3D model with animations, and generates sprite sheets for the animations in 5 directions along with normal maps
+for each frame of the sprite sheet.</p>
+<p>The generated sprite sheets and normal maps are then used in Godot along with a custom animator to animate characters.</p>
+<p><img alt="3D To 2D Pipeline" src="assets/images/projects/immersive_sim/3d_to_2d.png" /></p>
+<h2>Map Creation</h2>
+<p>As well as trying out Godot, I also wanted to try out <a href="https://trenchbroom.github.io/">TrenchBroom</a> which is a level editor for Quake-engine based games. That's how I made the map you walk around in the game!</p>
+<p><img alt="TrenchBroom" src="assets/images/projects/immersive_sim/trenchbroom.png" /></p>
+<h1>Screenshots</h1>
+<p><img alt="Gameplay" src="assets/images/projects/immersive_sim/main.gif" />
+<img alt="Gameplay" src="assets/images/projects/immersive_sim/1.png" />
+<img alt="Gameplay" src="assets/images/projects/immersive_sim/2.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2024 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterArticlesByTag() {
+            let searchInput = document.getElementById('search-bar').value.toLowerCase();
+            let blogContainers = document.querySelectorAll('.article-tag');
+            let searchResults = document.getElementById('search-results');
+            let blogsByTag = document.getElementById('articles-by-tag');
+            searchResults.innerHTML = '';
+
+            let found = false;
+
+            blogContainers.forEach(container => {
+                let tag = container.getAttribute('data-tag').toLowerCase();
+                if (tag.includes(searchInput)) {
+                    container.style.display = 'flex';
+                    found = true;
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            if (searchInput === '') {
+                searchResults.innerHTML = '';
+                blogsByTag.style.display = 'block';
+            } else {
+                blogContainers.forEach(container => {
+                    if (container.style.display === 'flex') {
+                        let tagHeader = document.createElement('h3');
+                        tagHeader.textContent = container.getAttribute('data-tag');
+                        searchResults.appendChild(tagHeader);
+                        container.querySelectorAll('.card').forEach(card => {
+                            searchResults.appendChild(card.cloneNode(true));
+                        });
+                    }
+                });
+
+                if (found) {
+                    blogsByTag.style.display = 'none';
+                } else {
+                    searchResults.innerHTML = '<p>Nothing found for the given tag.</p>';
+                    blogsByTag.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
