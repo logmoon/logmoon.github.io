@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>InfoEncryptor</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects_index1.html">Projects</a>
+                <a href="skillset.html">Skillset</a>
+                <a href="blogs_index1.html">Blogs</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article class="project-body" background-image: >
+    <h2>InfoEncryptor</h2>
+    <div class="tags">
+        
+            <a class="tag" href="projects_index1.html#Desktop Application">Desktop Application</a>
+        
+            <a class="tag" href="projects_index1.html#Python">Python</a>
+        
+    </div>
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <a href="https://github.com/logmoon/InfoEncryptor">Github (Source Code)</a>
+        
+    </div>
+    <hr>
+    <h1>Project Description</h1>
+<p>I've always wanted a way to locally and securely store my login credentials.I had already coded something that did this,</p>
+<p>and it was working alright, but on top of that I also wanted a way to archive and encrypt a bunch of my folders</p>
+<p>so I can easily and securely transfer them and back them up.</p>
+<p>That is why <strong>InfoEncryptor</strong> was created, I wanted a central hub that can securely store my data locally.</p>
+<h2>Features</h2>
+<h3>Account Management</h3>
+<p>The app allows for different users, you can create accounts, log into them, and encrypt data,</p>
+<p>the only way someone can access your data is if they know your password.</p>
+<p>Users and their data are stored locally inside a folder called <code>user_data</code> located in the root path of the application.</p>
+<h3>Folder Encryption &amp; Decryption</h3>
+<p>Encrypt folders securely.</p>
+<p>View a list of all encrypted folders.</p>
+<p>Decrypt folders and navigate to their locations directly from the application.</p>
+<p>Detect and manage missing encrypted folders with ease.</p>
+<h3>Login Data Management</h3>
+<p>Store and manage your login credentials securely.</p>
+<p>Add, delete, and view login entries for various websites or services.</p>
+<p>Copy email addresses and passwords to the clipboard with a single click.</p>
+<h3>Secure Key Storage</h3>
+<p>Encryption keys are stored securely, encrypted with the user's master key, ensuring maximum security.</p>
+<hr />
+<h1>Screenshots</h1>
+<p><img alt="Login" src="assets/images/projects/info_encryptor/login.png" /></p>
+<p><img alt="Encrypt/Decrypt" src="assets/images/projects/info_encryptor/enc_dec.png" /></p>
+<p><img alt="Login Data" src="assets/images/projects/info_encryptor/login_data.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2024 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterArticlesByTag() {
+            let searchInput = document.getElementById('search-bar').value.toLowerCase();
+            let blogContainers = document.querySelectorAll('.article-tag');
+            let searchResults = document.getElementById('search-results');
+            let blogsByTag = document.getElementById('articles-by-tag');
+            searchResults.innerHTML = '';
+
+            let found = false;
+
+            blogContainers.forEach(container => {
+                let tag = container.getAttribute('data-tag').toLowerCase();
+                if (tag.includes(searchInput)) {
+                    container.style.display = 'flex';
+                    found = true;
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            if (searchInput === '') {
+                searchResults.innerHTML = '';
+                blogsByTag.style.display = 'block';
+            } else {
+                blogContainers.forEach(container => {
+                    if (container.style.display === 'flex') {
+                        let tagHeader = document.createElement('h3');
+                        tagHeader.textContent = container.getAttribute('data-tag');
+                        searchResults.appendChild(tagHeader);
+                        container.querySelectorAll('.card').forEach(card => {
+                            searchResults.appendChild(card.cloneNode(true));
+                        });
+                    }
+                });
+
+                if (found) {
+                    blogsByTag.style.display = 'none';
+                } else {
+                    searchResults.innerHTML = '<p>Nothing found for the given tag.</p>';
+                    blogsByTag.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
