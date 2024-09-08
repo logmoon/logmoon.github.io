@@ -33,7 +33,8 @@
         </header>
         <main class="fade-in">
             
-<article class="project-body" background-image: >
+<article background-image: >
+    <div class="project-title">
     <h2>The Lost Hope (Monogame Version)</h2>
     <div class="tags">
         
@@ -42,26 +43,60 @@
             <a class="tag" href="projects_index1.html#Monogame">Monogame</a>
         
     </div>
+    </div>
     <hr>
     <div>
         <h3>Links</h3>
         
-            <a href="https://github.com/logmoon/TheLostHope">Github (Source Code)</a>
+            <li>
+                <a href="https://github.com/logmoon/TheLostHope">Github (Source Code)</a>
+            </li>
         
-            <a href="https://www.youtube.com/playlist?list=PLRI3RM3tSD-uK02pPdtGNgAcOGqOlZ_0g">Youtube Devlog Series</a>
+            <li>
+                <a href="https://www.youtube.com/playlist?list=PLRI3RM3tSD-uK02pPdtGNgAcOGqOlZ_0g">Youtube Devlog Series</a>
+            </li>
         
     </div>
     <hr>
-    <h1>Project Description</h1>
-<p>The lost hope is 2D metroidvania, bloodborne-like game.</p>
-<p>I started developping it using <a href="https://monogame.net/">Monogame</a> but it wasn't
-the best choice to build such a big game as a one man team.</p>
-<p>Most of the development time was taken by creating an engine on top of monogame.</p>
-<p>I actually ended up getting pretty far and coding a lot of interesting systems. You can check all of that out on the github repo linked above.</p>
-<p>This is what I managed to get in terms of gameplay:</p>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#gameplay">Gameplay</a></li>
+<li><a href="#engine">Engine</a></li>
+<li><a href="#custom-editor">Custom Editor</a></li>
+</ul>
+</li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>The lost hope is 2D metroidvania, bloodborne-like game. I started developping it using <a href="https://monogame.net/">Monogame</a> but it wasn't the best choice to build such a big game as a one man team. Most of the development time was taken by creating an engine on top of monogame.<br />
+I actually ended up getting pretty far and coding a lot of interesting systems. You can check all of that out on the github repo linked above.</p>
+<h2 id="gameplay">Gameplay</h2>
+<p>In terms of gameplay, this is what I managed to get:<br />
+<img alt="Gameplay" src="assets/images/projects/the_lost_hope/main.gif" /><br />
+This is a broad list of the gameplay features:<br />
+- Character movement (works for both player and npcs including enemies)<br />
+- State machine controller for all game entities that need state, the same implementation is used between all of them.<br />
+- Full integration with <a href="https://ldtk.io/">LDtk</a> as well as level transitions<br />
+- Main mechanic implemented, which is basically <strong>Ammo = Health</strong><br />
+- Simple enemy AI<br />
+- Interactions</p>
+<h2 id="engine">Engine</h2>
+<p>Lost Hope's engine has been developed along with the creation of the game. It features:<br />
+- An Animation system using <a href="https://www.aseprite.org/">Aseprite</a> and <a href="https://github.com/AristurtleDev/monogame-aseprite">Monogame.Aseprite</a><br />
+- An Orthographic camera<br />
+- A fully custom pooled input system<br />
+- A fully custom UI system<br />
+- A custom Content Manager<br />
+- Pooling<br />
+- Localization<br />
+- Scriptable Objects, which function very similarly to unity's scriptable objects, they are containers of data, but with the added benefit of being easier to work with and edit even during runtime.</p>
+<h2 id="custom-editor">Custom Editor</h2>
+<p>I also created a dedicated editor using Imgui, to help me edit the scriptable objects using reflection:<br />
+<img alt="Editor" src="assets/images/projects/the_lost_hope/main_editor.gif" /></p>
+<h1 id="screenshots">Screenshots</h1>
 <p><img alt="Gameplay" src="assets/images/projects/the_lost_hope/main.gif" /></p>
-<p>I also created a dedicated editor using Imgui, to help me edit custom assets using reflection:</p>
-<p><img alt="Editor" src="assets/images/projects/the_lost_hope/main_editor.gif" /></p>
 </article>
 
         </main>
