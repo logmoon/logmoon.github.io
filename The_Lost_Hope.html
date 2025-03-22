@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>The Lost Hope</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects_index.html">Projects</a>
+                <a href="blogs_index.html">Blogs</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>The Lost Hope</h2>
+    <div class="tags">
+        
+            <p class="tag">2D Game</p>
+        
+            <p class="tag">Monogame</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/TheLostHope">Github (Source Code)</a>
+            </li>
+        
+            <li>
+                <a href="https://www.youtube.com/playlist?list=PLRI3RM3tSD-uK02pPdtGNgAcOGqOlZ_0g">Youtube Devlog Series</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#the-lost-hope">The Lost Hope</a><ul>
+<li><a href="#gameplay">Gameplay</a></li>
+<li><a href="#engine">Engine</a></li>
+<li><a href="#custom-editor">Custom Editor</a></li>
+<li><a href="#whats-next">What's Next</a></li>
+</ul>
+</li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="the-lost-hope">The Lost Hope</h1>
+<p><strong>The Lost Hope</strong> is a 2D metroidvania-style game with a bloodborne-like vibe, and I originally started developing it using <a href="https://monogame.net/">Monogame</a>. At the time, I was super excited about the project, but it quickly became clear that building such a big game as a one-man team, especially with a custom engine on top of Monogame, was a bit of a stretch. Most of the development time was spent creating the engine itself, which slowed down progress on the actual game.</p>
+<p>Despite that, I managed to get pretty far and created some interesting systems along the way. I had to hit pause on the project for a bit, but now I’m back at it with a renewed focus, and I’m working to make <strong>The Lost Hope</strong> even better! The goal is to take everything I learned from my first attempt and build on it, streamlining development, improving the gameplay, and polishing the engine. You can check out the first iteration of the project on <a href="https://github.com/logmoon/TheLostHope">github</a>, but I currently don't plan on releasing the source code of current version of the game.</p>
+<h2 id="gameplay">Gameplay</h2>
+<p>In terms of gameplay, here’s what I’ve managed to get so far:</p>
+<p><img alt="Gameplay" src="assets/images/projects/the_lost_hope/main.gif" /></p>
+<p>Some key features I’ve implemented:<br />
+- <strong>Character Movement</strong> – This works for both the player and NPCs, including enemies.<br />
+- <strong>State Machine Controller</strong> – A shared implementation for all game entities that need state.<br />
+- <strong>LDtk Integration</strong> – Full integration with <a href="https://ldtk.io/">LDtk</a> for level transitions.<br />
+- <strong>Main Mechanic</strong> – The unique mechanic where <strong>Ammo = Health</strong>.<br />
+- <strong>Enemy AI</strong> – Simple enemy AI for basic interactions.<br />
+- <strong>Interactions</strong> – The core interactions that drive the gameplay forward.</p>
+<h2 id="engine">Engine</h2>
+<p>Lost Hope's engine has been built alongside the game itself. Some features include:<br />
+- <strong>Animation System</strong> – Using <a href="https://www.aseprite.org/">Aseprite</a> and <a href="https://github.com/AristurtleDev/monogame-aseprite">Monogame.Aseprite</a> for smooth animations.<br />
+- <strong>Orthographic Camera</strong> – A simple yet effective camera system.<br />
+- <strong>Custom Input System</strong> – A fully custom pooled input system for better control.<br />
+- <strong>UI System</strong> – A custom-built UI system to handle all in-game interfaces.<br />
+- <strong>Content Manager</strong> – A custom content manager to handle assets efficiently.<br />
+- <strong>Pooling &amp; Localization</strong> – For better performance and multi-language support.<br />
+- <strong>Scriptable Objects</strong> – Similar to Unity’s, but tailored to work seamlessly and edited during runtime.</p>
+<h2 id="custom-editor">Custom Editor</h2>
+<p>One of my favorite additions is the dedicated editor I created using Imgui. It allows me to edit scriptable objects using reflection, which makes managing game data a lot easier. Here's a quick look at it:</p>
+<p><img alt="Editor" src="assets/images/projects/the_lost_hope/main_editor.gif" /></p>
+<h2 id="whats-next">What's Next</h2>
+<p>Now that I’m back on the project, I’m focused on refining everything I’ve built so far, fixing up systems, and pushing the game further along. It’s exciting to revisit an old project with fresh ideas and new skills, and I can’t wait to see where <strong>The Lost Hope</strong> goes next!</p>
+<h1 id="screenshots">Screenshots</h1>
+<p><img alt="Gameplay" src="assets/images/projects/the_lost_hope/main.gif" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

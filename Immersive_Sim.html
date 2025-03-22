@@ -25,29 +25,29 @@
             <h1><span class="accent-color">log.moon</span></h1>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="projects_index1.html">Projects</a>
-                <a href="skillset.html">Skillset</a>
-                <a href="blogs_index1.html">Blogs</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="projects_index.html">Projects</a>
+                <a href="blogs_index.html">Blogs</a>
+                <a href="contact.html">Contact</a>
             </nav>
         </header>
         <main class="fade-in">
             
 <article background-image: >
-    <div class="project-title">
+    <div class="article-title">
     <h2>Immersive Sim in Godot</h2>
     <div class="tags">
         
-            <a class="tag" href="projects_index1.html#3D Game">3D Game</a>
+            <p class="tag">3D Game</p>
         
-            <a class="tag" href="projects_index1.html#Godot">Godot</a>
+            <p class="tag">Godot</p>
         
-            <a class="tag" href="projects_index1.html#Unity">Unity</a>
+            <p class="tag">Unity</p>
         
-            <a class="tag" href="projects_index1.html#TrenchBroom">TrenchBroom</a>
+            <p class="tag">TrenchBroom</p>
         
     </div>
     </div>
+    
     <hr>
     <div>
         <h3>Links</h3>
@@ -57,6 +57,7 @@
             </li>
         
     </div>
+    
     <hr>
     <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
 <li><a href="#project-description">Project Description</a><ul>
@@ -85,7 +86,7 @@ The generated sprite sheets and normal maps are then used in Godot along with a 
 
         </main>
         <footer>
-            <p>&copy; 2024 Amen Allah Ben Aissa</p>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
         </footer>
     </div>
 
@@ -111,49 +112,6 @@ The generated sprite sheets and normal maps are then used in Godot along with a 
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function filterArticlesByTag() {
-            let searchInput = document.getElementById('search-bar').value.toLowerCase();
-            let blogContainers = document.querySelectorAll('.article-tag');
-            let searchResults = document.getElementById('search-results');
-            let blogsByTag = document.getElementById('articles-by-tag');
-            searchResults.innerHTML = '';
-
-            let found = false;
-
-            blogContainers.forEach(container => {
-                let tag = container.getAttribute('data-tag').toLowerCase();
-                if (tag.includes(searchInput)) {
-                    container.style.display = 'flex';
-                    found = true;
-                } else {
-                    container.style.display = 'none';
-                }
-            });
-
-            if (searchInput === '') {
-                searchResults.innerHTML = '';
-                blogsByTag.style.display = 'block';
-            } else {
-                blogContainers.forEach(container => {
-                    if (container.style.display === 'flex') {
-                        let tagHeader = document.createElement('h3');
-                        tagHeader.textContent = container.getAttribute('data-tag');
-                        searchResults.appendChild(tagHeader);
-                        container.querySelectorAll('.card').forEach(card => {
-                            searchResults.appendChild(card.cloneNode(true));
-                        });
-                    }
-                });
-
-                if (found) {
-                    blogsByTag.style.display = 'none';
-                } else {
-                    searchResults.innerHTML = '<p>Nothing found for the given tag.</p>';
-                    blogsByTag.style.display = 'none';
-                }
-            }
         }
     </script>
 </body>

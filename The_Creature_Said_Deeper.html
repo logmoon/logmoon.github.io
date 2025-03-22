@@ -25,25 +25,25 @@
             <h1><span class="accent-color">log.moon</span></h1>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="projects_index1.html">Projects</a>
-                <a href="skillset.html">Skillset</a>
-                <a href="blogs_index1.html">Blogs</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="projects_index.html">Projects</a>
+                <a href="blogs_index.html">Blogs</a>
+                <a href="contact.html">Contact</a>
             </nav>
         </header>
         <main class="fade-in">
             
 <article background-image: >
-    <div class="project-title">
+    <div class="article-title">
     <h2>The Creature Said Deeper</h2>
     <div class="tags">
         
-            <a class="tag" href="projects_index1.html#2D Game">2D Game</a>
+            <p class="tag">2D Game</p>
         
-            <a class="tag" href="projects_index1.html#Unity">Unity</a>
+            <p class="tag">Unity</p>
         
     </div>
     </div>
+    
     <hr>
     <div>
         <h3>Links</h3>
@@ -57,6 +57,7 @@
             </li>
         
     </div>
+    
     <hr>
     <h1 id="project-description">Project Description</h1>
 <p>The creature said deeper is a fun game I made for the <a href="https://ldjam.com/events/ludum-dare/48">ludum dare 48 game jam</a>, as per the jam rules, the game was created in 48 hours using the Unity game engine. It's a top down point and click game with a very goofy story that accompanies the gameplay.</p>
@@ -67,7 +68,7 @@
 
         </main>
         <footer>
-            <p>&copy; 2024 Amen Allah Ben Aissa</p>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
         </footer>
     </div>
 
@@ -93,49 +94,6 @@
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function filterArticlesByTag() {
-            let searchInput = document.getElementById('search-bar').value.toLowerCase();
-            let blogContainers = document.querySelectorAll('.article-tag');
-            let searchResults = document.getElementById('search-results');
-            let blogsByTag = document.getElementById('articles-by-tag');
-            searchResults.innerHTML = '';
-
-            let found = false;
-
-            blogContainers.forEach(container => {
-                let tag = container.getAttribute('data-tag').toLowerCase();
-                if (tag.includes(searchInput)) {
-                    container.style.display = 'flex';
-                    found = true;
-                } else {
-                    container.style.display = 'none';
-                }
-            });
-
-            if (searchInput === '') {
-                searchResults.innerHTML = '';
-                blogsByTag.style.display = 'block';
-            } else {
-                blogContainers.forEach(container => {
-                    if (container.style.display === 'flex') {
-                        let tagHeader = document.createElement('h3');
-                        tagHeader.textContent = container.getAttribute('data-tag');
-                        searchResults.appendChild(tagHeader);
-                        container.querySelectorAll('.card').forEach(card => {
-                            searchResults.appendChild(card.cloneNode(true));
-                        });
-                    }
-                });
-
-                if (found) {
-                    blogsByTag.style.display = 'none';
-                } else {
-                    searchResults.innerHTML = '<p>Nothing found for the given tag.</p>';
-                    blogsByTag.style.display = 'none';
-                }
-            }
         }
     </script>
 </body>
