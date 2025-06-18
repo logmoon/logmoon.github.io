@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Corpus</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects_index.html">Projects</a>
+                <a href="blogs_index.html">Blogs</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>Corpus</h2>
+    <div class="tags">
+        
+            <p class="tag">2D Game</p>
+        
+            <p class="tag">Unity</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://logmoon.itch.io/corpus">Itch page (Play it)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#mutation-system">Mutation System</a></li>
+<li><a href="#modular-component-and-composition-system">Modular Component and Composition System</a><ul>
+<li><a href="#player">Player</a></li>
+<li><a href="#enemy">Enemy</a></li>
+<li><a href="#weapon">Weapon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>Corpus is a top-down roguelike shooter where the levels are fleshy, the enemies are weird, and the organization funding this whole operation refuses to answer any of your questions.</p>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/5.png" /></p>
+<p>This was originally supposed to be a submission for the 57th Ludum Dare game jam, but I wasn't able to finish it in time, and so I took a few extra hours to try getting it into a playable state.</p>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/1.png" /></p>
+<p>Even though the current playable version seems very barebones, there are a lot of thing going on under the hood. I'll talk about the mutation system, and the composition approach I took while building the game.</p>
+<h2 id="mutation-system">Mutation System</h2>
+<p>Everything in the game can mutate, be it weapons, npcs, enemies, and even the entire dungeon you play in. Mutations are driven by the player's actions throughout a run.<br />
+This system is in the game, and it works, but due to the time constraints I put for myself to finish the game, and the difficulty of authoring, and setting up the mutations in game (I kind of made the entire process difficult here), I opted to not add any.</p>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/mut.png" /></p>
+<p>But even though the system doesn't have any effect on the game currently, from the little testing I did while working on it, these mutations can create some really interesting scenarios, but you'd have to be very careful, and test very frequently to create something fun, predicatable and engaging.</p>
+<h2 id="modular-component-and-composition-system">Modular Component and Composition System</h2>
+<p>Every component is made to work with any "agent" (Called "character" internally) by agent I mean a character that thinks and executes logic (player, enemies, npcs, weapons, etc...).<br />
+The same weapons that you use during your run, are also used by the enemies, the same components the player uses to move, aim, shoot, etc... are also used by the enemies.</p>
+<p>I wanted to try this composition approach as I was really inspired by the way godot's nodes work, and how they encourage this composition approach to building stuff. Anything can be created by composing these components and tweaking their properties.</p>
+<h3 id="player">Player</h3>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/comp1.png" /></p>
+<h3 id="enemy">Enemy</h3>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/comp2.png" /></p>
+<h3 id="weapon">Weapon</h3>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/comp3.png" /></p>
+<h1 id="screenshots">Screenshots</h1>
+<p><img alt="Gameplay" src="assets/images/projects/corpus/1.png" /><br />
+<img alt="Gameplay" src="assets/images/projects/corpus/2.png" /><br />
+<img alt="Gameplay" src="assets/images/projects/corpus/3.png" /><br />
+<img alt="Gameplay" src="assets/images/projects/corpus/4.png" /><br />
+<img alt="Gameplay" src="assets/images/projects/corpus/5.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
