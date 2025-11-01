@@ -54,7 +54,7 @@
             
             <a class="card" href="projects/Corpus.html" style="background-image: url('../assets/images/projects/corpus/main.png');">
                 <div class="card-content">
-                    <h3>log.moon - Corpus</h3>
+                    <h3>Corpus</h3>
                     <p>
                         
                             2D Game, 
@@ -71,7 +71,7 @@
             
             <a class="card" href="projects/Immersive_Sim.html" style="background-image: url('../assets/images/projects/immersive_sim/main.gif');">
                 <div class="card-content">
-                    <h3>log.moon - Immersive Sim in Godot</h3>
+                    <h3>Immersive Sim in Godot</h3>
                     <p>
                         
                             3D Game, 
@@ -88,7 +88,7 @@
             
             <a class="card" href="projects/MentAI.html" style="background-image: url('../assets/images/projects/mentai/main.png');">
                 <div class="card-content">
-                    <h3>log.moon - MentAI</h3>
+                    <h3>MentAI</h3>
                     <p>
                         
                             AI Health Assistant, 
@@ -105,7 +105,7 @@
             
             <a class="card" href="projects/Muscle_Memory.html" style="background-image: url('../assets/images/projects/muscle_memory/cover.jpeg');">
                 <div class="card-content">
-                    <h3>log.moon - Muscle Memory</h3>
+                    <h3>Muscle Memory</h3>
                     <p>
                         
                             Mobile App, 
@@ -122,7 +122,7 @@
             
             <a class="card" href="projects/rAIs.html" style="background-image: url('../assets/images/projects/rais/main.png');">
                 <div class="card-content">
-                    <h3>log.moon - rAIs</h3>
+                    <h3>rAIs</h3>
                     <p>
                         
                             3D Interactive, 
@@ -139,7 +139,7 @@
             
             <a class="card" href="projects/Stock_Boy.html" style="background-image: url('../assets/images/projects/stock_boy/main4.gif');">
                 <div class="card-content">
-                    <h3>log.moon - Stock Boy</h3>
+                    <h3>Stock Boy</h3>
                     <p>
                         
                             2D Game, 
@@ -156,7 +156,7 @@
             
             <a class="card" href="projects/The_Lost_Hope.html" style="background-image: url('../assets/images/projects/the_lost_hope/main.gif');">
                 <div class="card-content">
-                    <h3>log.moon - The Lost Hope</h3>
+                    <h3>The Lost Hope</h3>
                     <p>
                         
                             2D Game, 
@@ -233,9 +233,12 @@
 // Get URL parameters and apply search on page load
 window.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const searchParam = urlParams.get('search');
-    
+    let searchParam = urlParams.get('search');
+
     if (searchParam) {
+        // Decode any URL-encoded characters safely
+        searchParam = decodeURIComponent(searchParam.replace(/\+/g, ' '));
+
         const projectSearch = document.getElementById('project-search');
         const blogSearch = document.getElementById('blog-search');
         
@@ -250,6 +253,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
 
 function searchBlogs() {
     const searchTerm = document.getElementById('blog-search').value.toLowerCase();

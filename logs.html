@@ -49,9 +49,12 @@
 // Get URL parameters and apply search on page load
 window.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const searchParam = urlParams.get('search');
-    
+    let searchParam = urlParams.get('search');
+
     if (searchParam) {
+        // Decode any URL-encoded characters safely
+        searchParam = decodeURIComponent(searchParam.replace(/\+/g, ' '));
+
         const projectSearch = document.getElementById('project-search');
         const blogSearch = document.getElementById('blog-search');
         
@@ -66,6 +69,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
 
 function searchBlogs() {
     const searchTerm = document.getElementById('blog-search').value.toLowerCase();
