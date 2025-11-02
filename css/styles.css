@@ -619,6 +619,26 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .codehilite .vm { color: #83a598 } /* Name.Variable.Magic */
 .codehilite .il { color: #d3869b } /* Literal.Number.Integer.Long */
 
+.codehilite {
+    background: #282828;
+    color: #dddddd;
+    overflow-x: auto;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.codehilite pre {
+    line-height: 125%;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+article .codehilite {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 /* CV Page Styles */
 .cv-download-wrapper {
     text-align: center;
