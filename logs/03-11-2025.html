@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Daily Log - 2</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                <a href="../logs.html">logs</a>
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article>
+    <p>2025-11-03</p>
+    <h2>Daily Log - 2</h2>
+    <div class="tags">
+        
+            <p class="tag">Game Dev</p>
+        
+            <p class="tag">Freelance</p>
+        
+            <p class="tag">Learning</p>
+        
+            <p class="tag">AI</p>
+        
+            <p class="tag">Social Media</p>
+        
+    </div>
+    <hr>
+    <h1 id="log">log</h1>
+<p>I managed to wake up early which is always really nice, I didn't do much in the morning though, I've had this obsession with making something inspired by vampire survivors but that does something unique, this obsession was brought forth by Megabonk which I've been playing quite a bit recently. I just kept iterating over ideas, and I did land on something really interesting, but honestly, I don't think I'm ready for another full blown game project right now, as I already have <strong>Parry Painter</strong> and I have plans to do other stuff, not game dev related. So while the idea was actually pretty unique and lowkey interesting, it's going to go to the notes for now, it's there, and if I get time and I'm excited to do it, I'll do it.</p>
+<hr />
+<p>After that ideation phase, I finally, finally fixed a bug for a freelance game project I've been working on for quite some time now, I don't think I can disclose anything about it, but the bug has been plaguing me and I've finally managed to fix it!</p>
+<p>Then, I took some time, recorded and uploaded some footage of Parry Painter on X and my personal social medias, which is something I usually never do. I've always been wary of posting progress and stuff I'm interested in publicly. For some reason I always worry too much about how people would react, about my public image and how people perceive me. But I wanted to just make the jump regardless - I'm posting dev videos of software I'm working on, I think it's interesting, I'm very passionate about it, and it's not hurting anyone or being inappropriate. So why not!</p>
+<p>Finally, finally went to university, and actually attended a class. It was about graph theory, very simple, but I know it has a lot of applications, so it was able to keep me interested, for the first hour at least lol.</p>
+<hr />
+<p>Uploaded a 2 new shorts to <strong>log.security</strong>, it's interesting seeing how different platforms react to the same video, and time of uploading also seems to have an effect. I'm going to keep doing 2 videos a day, while varying the upload times.</p>
+<p>I might also branch out and do similar videos with somewhat similar niches, this will let me do more than one "brand" essentially giving me another chance to "proc" the algorithm (Overpowered lantern reference?!? I've been playing a lot of Megabonk lol), but yeah, it'd also be a chance to upgrade the pipeline to allow for different topics as currently it's basically hard coded to cybersecurity.</p>
+<p>Currently the pipeline uses 2 LLM calls in sequence, each does something specific. The first takes in a transcription as input, and outputs a narration (image descriptions and actual narration), and the second LLM takes in that generated narration as input and outputs the metadata for each platform we want to upload on. We're chaining these LLM calls together to produce our desired final output.</p>
+<p>Now, you might see this called a "multi-agent workflow" in some places, but that's not quite accurate. True multi-agent systems have agents that interact with each other, make decisions, delegate tasks, and maintain state. What I have is a lot simpler, it's basically just a sequential pipeline.</p>
+<div class="codehilite"><pre><span></span><code>LLM_1 &gt; result &gt; LLM_2 &gt; result &gt; Done
+</code></pre></div>
+
+<p>And I can't help but see beauty to this simplicity, because you see "Multi-Agent Application" and "Multi-Agent Workflow" and libraries like <a href="https://www.langchain.com/">langchain</a> (which is pretty good btw) and other APIs and tools that do this multi agent stuff, and you think to yourself; "Damn, this shit must be really complicated" or as my genzimibras like to say:</p>
+<p>"DTSMBRC 🥀💔".</p>
+<p>But nope, <code>LLM_1</code> gets a system prompt (which infers its role, guidelines, expected inputs and outputs, maybe other stuff too), as well as an input, <code>LLM_1</code> outputs <code>result_1</code>, after that an intermediate step can take place here to process or manipulate <code>result_1</code> (say after that intermediate step we override <code>result_1</code> with our processed/manipulated result), then <code>LLM_2</code> gets its system prompt as well as <code>result_1</code>, and outputs <code>result_2</code>, repeat until you fulfil your intended <code>result_n</code>.</p>
+<p>My point is, it's really easy to get lost in all of these libraries, and tools to the point where everything becomes this unknown, mysterious, black box. But when you sit down and understand it, it's usually never THAT complicated.</p>
+<p>That's why I'm a big advocate of "Building your own X" at least once as a software engineer for any tool or API or framework or whatever you're interested in. Because, you get to actually see why this thing was created, basically the motivation behind it, what was the issue that prompted engineers to create this, and as you build it, you'll get to see the design decisions that were taken to create it, and when you use that thing again, you'll find that you have a bigger understanding of its intricacies, you'll find yourself understanding concepts better and being a little more efficient in how you use it. And you'll find yourself actually using those concepts in completely different software projects.</p>
+<p>Additionally, simplicity is such a powerful tool for writing software, complexity usually implies unpredictability. Unpredictability is very bad in software because it leads to bugs, unwanted behaviors, and really, really hard to debug code. So it's ideal for us to simplify whenever possible. I mean, sometimes, depending on the use case you need robustness and flexibility, and that usually comes with complexity, that's why I say "whenever possible".</p>
+<p>Going back to my use case, I just needed the 2 LLM calls chained together in a simple sequence. I could've used LangChain or some multi-agent framework, but why? That'd be adding complexity where simplicity suffices.</p>
+<hr />
+<p>Man, I'm really a yapper when it comes to writing these, huh? I started writing this at 8pm now it's 11pm. I've got to wrap this up lol.</p>
+<p>Today was alright, I wanted to touch on a few more projects than I did, but I couldn't, and that's okay, as long as today is even a little better than yesterday, I'm happy.</p>
+<p><strong>END</strong></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
