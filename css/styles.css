@@ -340,6 +340,7 @@ article img {
     margin: 1.5rem auto;
     max-width: 500px;
     padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .search-container input {
@@ -351,6 +352,7 @@ article img {
     border-radius: 8px;
     color: var(--light-text);
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .search-container input:focus {
@@ -399,13 +401,16 @@ article img {
 /* Utility Classes */
 .tags {
     margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 .tag {
     display: inline-block;
     background-color: var(--secondary);
     padding: 0.35rem 0.7rem;
-    margin: 0rem 0.1rem;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
@@ -494,21 +499,74 @@ a.tag:hover {
         max-width: 300px;
     }
 
+    /* Fix social grid on mobile */
     .social-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Fix contact sections on mobile */
     .contact-section, .connect-section {
+        max-width: 95%;
         padding: 0 1rem;
     }
 
-        .cv-links {
+    .contact-info {
+        padding: 1.5rem;
+    }
+
+    .cv-links {
         gap: 0.5rem;
     }
     
     .cv-link {
         padding: 0.35rem 0.75rem;
         font-size: 0.85rem;
+    }
+
+    /* Fix article width on mobile */
+    article {
+        max-width: 95%;
+        padding: 0 1rem;
+    }
+
+    /* Fix search bar on mobile */
+    .search-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    /* Fix CV layout on mobile */
+    .cv-section {
+        max-width: 95%;
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+
+    .cv-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .cv-sidebar {
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    .cv-main {
+        width: 100%;
+    }
+
+    .cv-portrait img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .cv-skill-tags {
+        gap: 0.4rem;
+    }
+
+    .cv-contact-details {
+        width: 100%;
     }
 }
 
@@ -520,6 +578,22 @@ a.tag:hover {
 
     .social-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Further reduce contact section padding on very small screens */
+    .contact-section, .connect-section {
+        max-width: 100%;
+        padding: 0 0.75rem;
+    }
+
+    .contact-info {
+        padding: 1rem;
+    }
+
+    /* Ensure article fits on small screens */
+    article {
+        max-width: 100%;
+        padding: 0 0.75rem;
     }
 }
 
@@ -725,6 +799,7 @@ article .codehilite {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    box-sizing: border-box;
 }
 
 .cv-header {
@@ -737,6 +812,7 @@ article .codehilite {
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .cv-sidebar {
@@ -744,6 +820,8 @@ article .codehilite {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .cv-main {
@@ -781,6 +859,7 @@ article .codehilite {
     flex-direction: column;
     gap: 0.4rem;
     margin-top: 1rem;
+    width: 100%;
 }
 
 .cv-contact-details p {
@@ -820,7 +899,7 @@ article .codehilite {
 .cv-skill-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 0.1rem;
+    gap: 0.5rem;
     justify-content: center;
 }
 
