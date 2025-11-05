@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Daily Log - 4</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                <a href="../logs.html">logs</a>
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article>
+    <p>2025-11-05</p>
+    <h2>Daily Log - 4</h2>
+    <div class="tags">
+        
+            <p class="tag">University</p>
+        
+            <p class="tag">Software Engineering</p>
+        
+            <p class="tag">Freelance</p>
+        
+            <p class="tag">Game Dev</p>
+        
+    </div>
+    <hr>
+    <h1 id="log">log</h1>
+<p>Woke up early thanks to the homie. Ate breakfast, drank a coffee, hell yeah!</p>
+<p>Went to uni, had a statistics class, and I realised how behind I actually am in terms of classes.</p>
+<p>Went home, ate, relaxed for a bit.</p>
+<p>Hit the café, I worked on some personal projects and fixed a few bugs and improved a few prompts in my shorts generator, I also improved the prompt of the script that takes in this log and generates an X post. I fixed layout on mobile devices for my website (the one you're reading this on), it had issues and I didn't bother before, but there is a sizeable amount people that are visiting on mobile, so for those, you're welcome!</p>
+<p>I'll rapid fire through what I did; A lot of improvements to the short videos generator. Made it a lot more stable. Improved the metadata prompt. Improved the narration audio gen. Added the ability to pick what episode to generate the video based on, it was always random up to that point. And a few smaller bug fixes here and there.</p>
+<p>I also have this pitch for my french class. It's a group project, and I got my tasks done, ready for friday.</p>
+<p>Can't have a day without some wishful day dreaming and planning of projects that won't see the light of day (not any time soon anyhow).</p>
+<p>I finished a freelancing job, it's basically a single page, static website for a battle bots team, I made it with nextjs, it also has a CMS, because I'm a great person! It was basically ready, and actually hosted on netlify for like a month, I was just waiting on the team to get a domain name, which they did not long ago, so today I sat down and set it up, it would've been a lot easier if I had paid any attention to my networking class last year, a whole bunch of domains and types, and records and DNS servers, and propagation, etc. I struggled for a bit, but we got it working! It's actually a huge relief to have finally gotten this job done, it's been on my mind for months, with the added bonus that I now understand how this domain shit works!</p>
+<p>I also finally managed to get some work done on <strong>Parry Painter</strong> here are the updates:</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">### Done</span>
+<span class="k">- [x]</span> Increase knockback on enemy from knockback
+<span class="k">- [x]</span> Add audio_playing -&gt; bool function
+<span class="k">- [x]</span> Fix overlapping audios (in explosion, and parry, and all other audios too)
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>Made it replay the audio if it&#39;s already playing
+<span class="k">- [x]</span> Stun enemies on goo explode
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>Actually pretty good
+<span class="k">- [x]</span> Knockback enemies when damaged by goo
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>Also really good
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>Knockback force scales inversely with the size of the enemy
+<span class="k">- [x]</span> Parry knockback based on enemy size
+<span class="gu">### Notes</span>
+<span class="k">-</span><span class="w"> </span>Fixed damage flash effect to only update when the game isn&#39;t frozen, which somehow made the parry feel even better lol, hell yeah!
+</code></pre></div>
+
+<p>Not as much progress as I was hoping to do on <strong>Parry Painter</strong> sadly. The work session kind of felt all over the place, and that's because it was, I was literally doing like 3 things at the same time, but it's good to have some progress at the end of the day, even if it's small.</p>
+<p>That's it for me for today, I'm really tired and really hungry, so I'm going to eat, and play Megabonk for at least 2 hours (I HAVE TO GET A GOOD NOELLE RUN DUDE, I CANT TAKE THIS SHIT ANYMORE).</p>
+<p><strong>END</strong></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
