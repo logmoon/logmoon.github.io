@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Fragmented</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                <a href="../logs.html">logs</a>
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>Fragmented</h2>
+    <div class="tags">
+        
+            <p class="tag">2D Game</p>
+        
+            <p class="tag">Godot</p>
+        
+            <p class="tag">Global Game Jam</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://globalgamejam.org/games/2026/fragmented-9">Global Game Jam (Play it)</a>
+            </li>
+        
+            <li>
+                <a href="https://logmoon.itch.io/fragmented">Itch (Play it)</a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/logmoon/ggj_game">Source Code (I don't recommend looking at ts lol)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <h1 id="project-description">Project Description</h1>
+<p>Made for the Global Game Jam 2026 in 48~ish hours, it's a top down endless hoarde bullet hell inspired by <a href="https://devildaggers.com/">Devil Daggers</a> and <a href="https://www.leagueoflegends.com/en-us/champions/xayah/">Xayah</a>'s moveset from <a href="https://www.leagueoflegends.com/">league of legends</a>.</p>
+<p>The jam theme was <strong>MASK</strong>, which led us to design a core mechanic where the player’s mask represents both health and offense. Attacking requires throwing shards of the mask, costing 1 HP per shard. The only way to recover health is by recalling previously thrown shards and hitting enemies with them, creating a constant risk-reward loop.</p>
+<p>That mechanic is the core of the experience, and I basically designed everything in the game around it. From early playtests during development, the most common feedback we received was that the gameplay felt addictive, which was exactly what we were aiming for.</p>
+<p>I took charge of managing the team which was composed of <a href="https://www.linkedin.com/in/chaima-naili-56192621a/">Chaima Naili</a> and <a href="https://www.facebook.com/abdenour.bentaieb.2025">Abdenour Ben Taieb</a>, both beginners to game dev who joined to learn, and <strong>Aymen Sliti</strong> an experienced godot developer.</p>
+<p>I was the main programmer and game designer, created most of the sound effects, and contributed to basically everything during development. <strong>Aymen</strong> handled animation and lead art while assisting with code, <strong>Chaima</strong> worked on story and art, and <strong>Abdenour</strong> focused on UI and helped implement early gameplay systems.</p>
+<h1 id="trailer">Trailer</h1>
+<div style="display: flex; justify-content: center;">
+  <video controls width="100%">
+    <source src="../assets/images/projects/fragmented/trailer.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<h1 id="screenshots">Screenshots</h1>
+<p><img alt="Gameplay" src="../assets/images/projects/fragmented/main.png" /><br />
+<img alt="Gameplay" src="../assets/images/projects/fragmented/1.png" /><br />
+<img alt="Gameplay" src="../assets/images/projects/fragmented/2.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2025 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
