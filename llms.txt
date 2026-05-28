@@ -7,11 +7,11 @@ I'm a software engineer and data science student driven by curiosity about how s
 
 
 ## Skills
-- Programming Languages: C#, C/C++, Assembly, Python, Java, Javascript, HTML/CSS, Dart, SQL
+- Programming Languages: C#, C, Assembly, Python, Java, Javascript, Typescript, HTML/CSS, Dart, SQL
 - Game Development: Unity, Godot, Monogame, Raylib, Sokol
 - Web Development: ASP.NET, Django, Flask, Angular, React, Nextjs
-- Mobile Development: Flutter, React Native
-- Machine Learning: PyTorch, TensorFlow, Scikit-learn, Langchain
+- Mobile Development: Flutter, React Native, Expo
+- Machine Learning: PyTorch, TensorFlow, Scikit-learn, Langchain, NLP
 - Data & Analytics: Pandas, NumPy, Power BI, Row-Level Security
 - Tools & DevOps: Git, GitHub, Docker, Linux, Blender, REST APIs, CI/CD, Netlify, Render, Photoshop, Figma
 
@@ -60,10 +60,63 @@ Managed and maintained the Tek-up IEEE Student Branch Computer Society chapter w
 ## Projects
 
 ### [Parky (Administration panel)](https://logmoon.github.io/projects/AABAParky.html)
-Tags: Desktop Application, GTK and Glade, C/C++
+Tags: Desktop Application, GTK and Glade, C
 This was for a univesity course. The entire course was to create a desktop application that manages parking lots, and it's to be written in C with GTK and Glade for the GUI. My task was to create the administration panel for the app, which basically allows you to do CRUD operations on the parking lots.
 It was a great opportunity to flex my C skills, learn new technologies, and most importantly work with and manage a team.
 - [Github (Source Code)](https://github.com/logmoon/AABAParky)
+
+### [ABSA Pipeline](https://logmoon.github.io/projects/absa-pipeline.html)
+Tags: Python, NLP, Deep Learning, BERT, HuggingFace
+A two-stage NLP pipeline that identifies what aspects are discussed in a review and determines how the author feels about each one.
+
+For a deep learning class, we had a group project to build a smart ecommerce shop that uses AI to drive a better experience for users. My task was to handle product reviews; take em, and get a sentiment score out.
+
+This sounded generic to me, even though I had never really done anything like this, I was familiar with the approach, get a pre-trained encoder model like bert, fine-tune it if needed and run it for each review, get a sentiment score and average all of em.
+
+But as I said that felt too simple and I wasn't going to learn much doing that. So I looked at other ways this could be done and found out about Aspect-Based Sentiment Analysis. Instead of just asking "is this review positive or negative?", ABSA asks "what is the reviewer talking about, and how do they feel about each thing specifically?". I liked the approach a lot more, so I went for it.
+
+It's a two stage pipeline, each stage is its own fine-tuned bert-base-uncased model.
+
+Both models were fine-tuned on the [MAMS](https://github.com/siat-nlp/MAMS-for-ABSA) dataset with extra training examples pulled from [SemEval-2014 Task 4](https://aclanthology.org/S14-2004/) (laptops + restaurants).
+
+Stage 1 — Aspect Span Extraction
+
+The first model is a token classifier. It reads the review and tags every single token with one of three labels: B-ASP for the beginning of an aspect term, I-ASP for the continuation of one, and O for everything else. This is called the BIO scheme. Contiguous B and I tokens get merged into a single aspect term, so something like ["battery", "life"] becomes "battery life".
+
+Stage 2 — Sentiment Classification
+
+The second model takes each extracted aspect and classifies the sentiment toward it, and the trick here is rather than feeding just the review, you feed it as a sentence pair: [CLS] review text [SEP] aspect term [SEP]. This lets the model attend to the review in the context of a specific aspect.
+- [Github (Source Code)](https://github.com/UseCondomsKid/absa-pipeline)
+- [ASE Model](https://huggingface.co/UseCondomsKid/ase-model)
+- [ABSA Model](https://huggingface.co/UseCondomsKid/absa-model)
+
+### [CORM](https://logmoon.github.io/projects/corm.html)
+Tags: C, ORM, SQL, Library
+CORM is a very lightweight SQL "ORM" built entirely in C with no external dependencies.
+
+We had a class about Backend development in java and in that class we had talked about [Hirenate](https://hibernate.org/), I was already familiar with ORMs and have used ones before, but sitting in class and having somebody dive a little deep into how this Hibernate worked and how you interface with it gave me the idea to also dig a little deeper and try to actually implement an ORM of my own. Also to piss off the java devs.
+
+ORMs ususally rely on a sort of reflection that's built into the language they're implemented in, but as we all know, C has no reflection, and the solution is and always will be macros!.
+
+It's been a priority for me in corm to keep the API as clean as possible for all users without any unnecessary fluff while at the same time not stealing control from users. It was quite the difficult line to walk, but I'd say I managed to deliver on both accounts, even if a little.
+
+Here's how you'd define a model:
+
+DEFINE_MODEL builds a static struct that holds each field's name, type, size, flags, and validator function pointer (if you want to supply one), the field macro are variadic.
+The actual memory layout is figured out using offsetof, which is how CORM knows where each field sits inside your struct.
+
+At first it was just curiousity, I just wanted to see if this were even possible, and I just focused on that, I used [sqlite](https://sqlite.org/index.html) as the sql driver and went to work.
+
+Once I had it working, I looked at how I could improve it and actually make it something akin to a library that can be used by other people.
+
+The answer was to abstract the backend, and do a bunch of cleaning up and a lot of back and forth on the API, and the mechanisms of when and how to call the driver. Querying also went through a few iterations, I tried my best to make it "secure" and not prone to those pesky code injections, but then I gave up lol. I might revist it another day.
+
+Other fun stuff like validators, and hooks were also added at a later stage.
+
+There are no shortcomings, it's perfect.
+
+Spoiler
+- [Github (Source Code)](https://github.com/logmoon/corm)
 
 ### [Corpus](https://logmoon.github.io/projects/Corpus.html)
 Tags: 2D Game, Unity, C#, Game jam
@@ -85,7 +138,7 @@ I wanted to try this composition approach as I was really inspired by the way go
 - [Itch page (Play it)](https://logmoon.itch.io/corpus)
 
 ### [Entity Component System in C99](https://logmoon.github.io/projects/Entity_Component_System_in_C99.html)
-Tags: Plugin, C/C++
+Tags: Plugin, C
 This is a very simple and basic Entity Component System I wrote in C99.
 I wrote this as a learning experience, and so I can use it in the engine I was working on at the time, you can check that out [here](https://github.com/logmoon/Nyx-Engine/tree/main).
 - [Github (Source Code)](https://github.com/logmoon/C-Entity-Component-System/tree/main)
@@ -161,7 +214,7 @@ What I ended up with is a really simple workout tracker, where I can create work
 - [Github (Source Code)](https://github.com/logmoon/muscle-memory)
 
 ### [Nyx Engine](https://logmoon.github.io/projects/Nyx_Engine.html)
-Tags: 2D Game Engine, C/C++, SDL2
+Tags: 2D Game Engine, C, SDL2
 This was an attempt at creating a 2D game engine from scratch using the C programming language along with SDL. It was actually my second attempt creating something like this, you can check out how my first attempt went [here](https://github.com/logmoon/C-Game-Engine-from-scratch).
 
 Everything was coded from scratch as a learning experiment, it featured:
@@ -211,6 +264,39 @@ The technical workflow is quite interesting:
 - The custom animation system brings rAIs to life with synchronized speech and expressions
 
 After lots of tweaking and testing (and like two sleepless nights), we got everything running well. The best part was seeing people's reactions when they tried it at TSYP - I can't express how special that felt, totally worth all the time and effort we spent!
+
+### [Rental Property Manager](https://logmoon.github.io/projects/rental-property-manager.html)
+Tags: React Native, Expo, Typescript, Supabase, CI/CD, Mobile
+A rental property management app for my family's rental houses in Tunisia. The family can manage the houses and the rentals, and agents can browse houses, and check availability.
+
+Every year my father would manually draw a calendar and keep track of everything in a singular notebook that lived at our house. So basically nobody other than my father (who's very forgetful to begin with) and the notebook, knew which houses were rented and when and by whom and whether money was paid.
+
+This caused a lot of headaches. Agents would call my father while he was at work asking about availability, prices, anything. Since the notebook was at home he couldn't answer, so he'd call me or anyone at the house, and sometimes nobody was home. We lost rentals because of it. Agents asking me which houses are available and me having no fucking clue. Renters asking any part of the family and nobody knowing. All because of that damn notebook.
+
+So I sat down and decided an app to fix it. Now me, my family, and the agents we work with can always know at any time which houses are rented and which aren't and any additional info needed. Only admins (family) can make changes, agents can just open the app and look, and if they have actual renters they can call to confirm.
+
+Offline access was important because sometimes people call you at any time and you don't always have internet, so it needed to still work offline.
+
+The app was born in the summer of 2025. Initially it was really simple with a lot of hardcoded elements, but it did its job. This year I did a full pass and added a lot:
+
+- Images and prices to houses
+- Tasks associated with each house (cleaning, repairs, purchases)
+- A full CI/CD workflow
+- Push notifications
+- Houses are now fully configurable from settings (images, name, price, etc), nothing is hardcoded anymore
+- Proper JWT auth, before the admin password was literally hardcoded
+- A QR code to easily share the app with a copy link option
+- Tests
+- Hundreds of bug fixes and improvements
+
+I didn't want to bother everybody every few days with "hey I updated the app, please delete the version you have and here's a new download link, download it and install it". It was getting old, and my family and especially the agents are not very technically inclined. Having to test everything each time as well to make sure nothing broke was getting tedious.
+
+So I decided to set up a CI/CD workflow.
+
+When I push to GitHub, everything is done automatically. We first run the tests to make sure they all pass, then we figure out the type of changes; If they're a JS only change, the app updates itself on the fly on next startup using Expo Updates, nobody has to do anything. If they're a native change that requires a full rebuild, the app detects that it's outdated on startup, shows a blocking screen with a button that takes you to the latest GitHub release to download the new version. Either way I can work on the app in my leisure, push to GitHub, and everything handles itself.
+
+React Native with Expo, TypeScript, Supabase for the backend (PostgreSQL, Storage, Realtime, Edge Functions), custom JWT auth, and EAS for builds and updates.
+- [Github (Source Code)](https://github.com/logmoon/Location-Majdi-Ben-Aissa)
 
 ### [RogueDeff](https://logmoon.github.io/projects/RogueDeff.html)
 Tags: 2D Game, Unity, C#, Game jam
@@ -307,7 +393,7 @@ It supports:
 - [Github (Source Code and Guide)](https://github.com/logmoon/Unity-Saving-System)
 
 ### [Will it run?](https://logmoon.github.io/projects/Will_It_Run.html)
-Tags: 2D Game, C/C++, Raylib, Game jam
+Tags: 2D Game, C, Raylib, Game jam
 This is an interesting game I made for the [Ludum Dare 56 Game Jam](https://ldjam.com/events/ludum-dare/56), I coded the entire thing from scratch in C using Raylib as a backend, it was made in 72 hours "amidst a time of despair and misery" (quoted from the game page). It's a weird management game, where you basically get abducted by aliens and have to code apps for them while managing bugs that keep spawning in.
 
 Technically speaking, I'd say I managed to do quite a bit considering the time limit, even though the gameplay lacked a bit, it was still fun to code and a [massive](https://www.youtube.com/watch?v=ryNMM5pMPr0) learning experience. I basically created an entire programming language for the game, and created a whole fully functionning, and pretty feature rich text editor within the game, all with C mind you.

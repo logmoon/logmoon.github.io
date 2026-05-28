@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - CORM</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>CORM</h2>
+    <div class="tags">
+        
+            <p class="tag">C</p>
+        
+            <p class="tag">ORM</p>
+        
+            <p class="tag">SQL</p>
+        
+            <p class="tag">Library</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/corm">Github (Source Code)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#why">Why</a></li>
+<li><a href="#the-macro-system">The Macro System</a></li>
+<li><a href="#development">Development</a></li>
+<li><a href="#shortcomings">Shortcomings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>CORM is a very lightweight SQL "ORM" built entirely in C with no external dependencies.</p>
+<h2 id="why">Why</h2>
+<p>We had a class about Backend development in java and in that class we had talked about <a href="https://hibernate.org/">Hirenate</a>, I was already familiar with ORMs and have used ones before, but sitting in class and having somebody dive a little deep into how this Hibernate worked and how you interface with it gave me the idea to also dig a little deeper and try to actually implement an ORM of my own. Also to piss off the java devs.</p>
+<h2 id="the-macro-system">The Macro System</h2>
+<p>ORMs ususally rely on a sort of reflection that's built into the language they're implemented in, but as we all know, C has no reflection, and the solution is and always will be <strong>macros!</strong>.</p>
+<p>It's been a priority for me in corm to keep the API as clean as possible for all users without any unnecessary fluff while at the same time not stealing control from users. It was quite the difficult line to walk, but I'd say I managed to deliver on both accounts, even if a little.</p>
+<p>Here's how you'd define a model:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">username</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">email</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_active</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">User</span><span class="p">;</span>
+
+<span class="n">DEFINE_MODEL</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="p">,</span>
+<span class="w">    </span><span class="n">F_INT</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">PRIMARY_KEY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">AUTO_INC</span><span class="p">),</span>
+<span class="w">    </span><span class="n">F_STRING_LEN</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_NULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">UNIQUE</span><span class="p">),</span>
+<span class="w">    </span><span class="n">F_STRING</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_NULL</span><span class="p">),</span>
+<span class="w">    </span><span class="n">F_INT</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">),</span>
+<span class="w">    </span><span class="n">F_BOOL</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">is_active</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p><code>DEFINE_MODEL</code> builds a static struct that holds each field's name, type, size, flags, and validator function pointer (if you want to supply one), the field macro are variadic.<br />
+The actual memory layout is figured out using <code>offsetof</code>, which is how CORM knows where each field sits inside your struct.</p>
+<h2 id="development">Development</h2>
+<p>At first it was just curiousity, I just wanted to see if this were even possible, and I just focused on that, I used <a href="https://sqlite.org/index.html">sqlite</a> as the sql driver and went to work.</p>
+<p>Once I had it working, I looked at how I could improve it and actually make it something akin to a library that can be used by other people.</p>
+<p>The answer was to abstract the backend, and do a bunch of cleaning up and a lot of back and forth on the API, and the mechanisms of when and how to call the driver. Querying also went through a few iterations, I tried my best to make it "secure" and not prone to those pesky code injections, but then I gave up lol. I might revist it another day.</p>
+<p>Other fun stuff like validators, and hooks were also added at a later stage.</p>
+<h2 id="shortcomings">Shortcomings</h2>
+<p>There are no shortcomings, it's perfect.</p>
+<details class="spoiler">
+<p><summary>Spoiler</summary><div class="spoiler-content" markdown="1"></p>
+<p><img alt="why is he lying" src="https://i.kym-cdn.com/photos/images/original/003/074/378/d75.jpg" /></p>
+</div>
+</details>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

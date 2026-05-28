@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Location Majdi Ben Aissa</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>Location Majdi Ben Aissa</h2>
+    <div class="tags">
+        
+            <p class="tag">React Native</p>
+        
+            <p class="tag">Expo</p>
+        
+            <p class="tag">Typescript</p>
+        
+            <p class="tag">Supabase</p>
+        
+            <p class="tag">CI/CD</p>
+        
+            <p class="tag">Mobile</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/Location-Majdi-Ben-Aissa">Github (Source Code)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#why">Why</a></li>
+<li><a href="#the-app">The App</a></li>
+<li><a href="#the-update-system">The Update System</a></li>
+<li><a href="#tech">Tech</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>A rental property management app for my family's rental houses in Tunisia. The family can manage the houses and the rentals, and agents can browse houses, and check availability.</p>
+<h2 id="why">Why</h2>
+<p>Every year my father would manually draw a calendar and keep track of everything in a singular notebook that lived at our house. So basically nobody other than my father (who's very forgetful), so actually nobody other than the notebook, knew which houses were rented and when and by whom and whether money was paid.</p>
+<p>This caused a lot of headaches. Agents would call my father while he was at work to ask about availability, prices, anything, and since the notebook was at home he couldn't answer, so he'd have to call me or anyone at the house, and sometimes nobody was home. We lost rentals because of it. Agents asking me which houses are available and me having no fucking clue. Renters asking any part of the family and still nobody knows without that damn notebook.</p>
+<p>So I sat down and built an app to fix it. Now me, my family, and the agents we work with can always know at any time which houses are rented and which aren't and any additional info needed. Only admins (family) can make changes, agents can just open the app and look, and if they have actual renters they can call to confirm.</p>
+<p>Offline access was important because sometimes people call you at any time and you don't always have internet, so it needed to still work offline.</p>
+<h2 id="the-app">The App</h2>
+<p>The app was born in the summer of 2025. Initially it was really simple with a lot of hardcoded elements, but it did its job. This year I did a full pass and added a lot:</p>
+<ul>
+<li>Images and prices to houses</li>
+<li>Tasks associated with each house (cleaning, repairs, purchases)</li>
+<li>Push notifications</li>
+<li>Houses are now fully configurable from settings (images, name, price, etc), nothing is hardcoded anymore</li>
+<li>Proper JWT auth, before the admin password was literally hardcoded</li>
+<li>A QR code to easily share the app with a copy link option</li>
+<li>Tests</li>
+<li>Hundreds of bug fixes and improvements</li>
+</ul>
+<h2 id="the-update-system">The Update System</h2>
+<p>I didn't want to bother everybody every few days with "hey I updated the app, please delete the version you have and here's a new download link, download it and install it". It was getting old, and my family and especially the agents are not very technically inclined, so I set up a full CI/CD workflow.</p>
+<p>When I push to GitHub, everything is done automatically. If it's a JS only change, the app updates itself on the fly on next startup using Expo Updates, nobody has to do anything. If it's a native change that requires a full rebuild, the app detects that it's outdated on startup, shows a blocking screen with a button that takes you to the latest GitHub release to download the new version. Either way I can work on the app in my leisure, push to GitHub, and everything handles itself.</p>
+<h2 id="tech">Tech</h2>
+<p>React Native with Expo, TypeScript, Supabase for the backend (PostgreSQL, Storage, Realtime, Edge Functions), custom JWT auth, and EAS for builds and updates.</p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

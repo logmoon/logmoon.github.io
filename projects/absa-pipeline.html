@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - ABSA Pipeline</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>ABSA Pipeline</h2>
+    <div class="tags">
+        
+            <p class="tag">Python</p>
+        
+            <p class="tag">NLP</p>
+        
+            <p class="tag">Deep Learning</p>
+        
+            <p class="tag">BERT</p>
+        
+            <p class="tag">HuggingFace</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/UseCondomsKid/absa-pipeline">Github (Source Code)</a>
+            </li>
+        
+            <li>
+                <a href="https://huggingface.co/UseCondomsKid/ase-model">ASE Model</a>
+            </li>
+        
+            <li>
+                <a href="https://huggingface.co/UseCondomsKid/absa-model">ABSA Model</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#why">Why</a></li>
+<li><a href="#how-it-works">How It Works</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>A two-stage NLP pipeline that identifies <strong>what</strong> aspects are discussed in a review and determines <strong>how</strong> the author feels about each one.</p>
+<h2 id="why">Why</h2>
+<p>For a deep learning class, we had a group project to build a smart ecommerce shop that uses AI to drive a better experience for users. My task was to handle product reviews; take em, and get a sentiment score out.</p>
+<p>This sounded generic to me, even though I had never really done anything like this, I was familiar with the approach, get a pre-trained encoder model like bert, fine-tune it if needed and run it for each review, get a sentiment score and average all of em.</p>
+<p>But as I said that felt too simple and I wasn't going to learn much doing that. So I looked at other ways this could be done and found out about Aspect-Based Sentiment Analysis. Instead of just asking "is this review positive or negative?", ABSA asks "what is the reviewer talking about, and how do they feel about each thing specifically?". I liked the approach a lot more, so I went for it.</p>
+<h2 id="how-it-works">How It Works</h2>
+<p>It's a two stage pipeline, each stage is its own fine-tuned <code>bert-base-uncased</code> model.</p>
+<p>Both models were fine-tuned on the <a href="https://github.com/siat-nlp/MAMS-for-ABSA">MAMS</a> dataset with extra training examples pulled from <a href="https://aclanthology.org/S14-2004/">SemEval-2014 Task 4</a> (laptops + restaurants).</p>
+<p><strong>Stage 1 — Aspect Span Extraction</strong></p>
+<p>The first model is a token classifier. It reads the review and tags every single token with one of three labels: <code>B-ASP</code> for the beginning of an aspect term, <code>I-ASP</code> for the continuation of one, and <code>O</code> for everything else. This is called the BIO scheme. Contiguous <code>B</code> and <code>I</code> tokens get merged into a single aspect term, so something like <code>["battery", "life"]</code> becomes <code>"battery life"</code>.</p>
+<p><strong>Stage 2 — Sentiment Classification</strong></p>
+<p>The second model takes each extracted aspect and classifies the sentiment toward it, and the trick here is rather than feeding just the review, you feed it as a sentence pair: <code>[CLS] review text [SEP] aspect term [SEP]</code>. This lets the model attend to the review in the context of a specific aspect.</p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
