@@ -59,37 +59,6 @@ Managed and maintained the Tek-up IEEE Student Branch Computer Society chapter w
 
 ## Projects
 
-### [Parky (Administration panel)](https://logmoon.github.io/projects/AABAParky.html)
-Tags: Desktop Application, GTK and Glade, C
-This was for a univesity course. The entire course was to create a desktop application that manages parking lots, and it's to be written in C with GTK and Glade for the GUI. My task was to create the administration panel for the app, which basically allows you to do CRUD operations on the parking lots.
-It was a great opportunity to flex my C skills, learn new technologies, and most importantly work with and manage a team.
-- [Github (Source Code)](https://github.com/logmoon/AABAParky)
-
-### [ABSA Pipeline](https://logmoon.github.io/projects/absa-pipeline.html)
-Tags: Python, NLP, Deep Learning, BERT, HuggingFace
-A two-stage NLP pipeline that identifies what aspects are discussed in a review and determines how the author feels about each one.
-
-For a deep learning class, we had a group project to build a smart ecommerce shop that uses AI to drive a better experience for users. My task was to handle product reviews; take em, and get a sentiment score out.
-
-This sounded generic to me, even though I had never really done anything like this, I was familiar with the approach, get a pre-trained encoder model like bert, fine-tune it if needed and run it for each review, get a sentiment score and average all of em.
-
-But as I said that felt too simple and I wasn't going to learn much doing that. So I looked at other ways this could be done and found out about Aspect-Based Sentiment Analysis. Instead of just asking "is this review positive or negative?", ABSA asks "what is the reviewer talking about, and how do they feel about each thing specifically?". I liked the approach a lot more, so I went for it.
-
-It's a two stage pipeline, each stage is its own fine-tuned bert-base-uncased model.
-
-Both models were fine-tuned on the [MAMS](https://github.com/siat-nlp/MAMS-for-ABSA) dataset with extra training examples pulled from [SemEval-2014 Task 4](https://aclanthology.org/S14-2004/) (laptops + restaurants).
-
-Stage 1 — Aspect Span Extraction
-
-The first model is a token classifier. It reads the review and tags every single token with one of three labels: B-ASP for the beginning of an aspect term, I-ASP for the continuation of one, and O for everything else. This is called the BIO scheme. Contiguous B and I tokens get merged into a single aspect term, so something like ["battery", "life"] becomes "battery life".
-
-Stage 2 — Sentiment Classification
-
-The second model takes each extracted aspect and classifies the sentiment toward it, and the trick here is rather than feeding just the review, you feed it as a sentence pair: [CLS] review text [SEP] aspect term [SEP]. This lets the model attend to the review in the context of a specific aspect.
-- [Github (Source Code)](https://github.com/UseCondomsKid/absa-pipeline)
-- [ASE Model](https://huggingface.co/UseCondomsKid/ase-model)
-- [ABSA Model](https://huggingface.co/UseCondomsKid/absa-model)
-
 ### [CORM](https://logmoon.github.io/projects/corm.html)
 Tags: C, ORM, SQL, Library
 CORM is a very lightweight SQL "ORM" built entirely in C with no external dependencies.
@@ -118,77 +87,6 @@ There are no shortcomings, it's perfect.
 Spoiler
 - [Github (Source Code)](https://github.com/logmoon/corm)
 
-### [Corpus](https://logmoon.github.io/projects/Corpus.html)
-Tags: 2D Game, Unity, C#, Game jam
-Corpus is a top-down roguelike shooter where the levels are fleshy, the enemies are weird, and the organization funding this whole operation refuses to answer any of your questions.
-
-This was originally supposed to be a submission for the 57th Ludum Dare game jam, but I wasn't able to finish it in time, and so I took a few extra hours to try getting it into a playable state.
-
-Even though the current playable version seems very barebones, there are a lot of thing going on under the hood. I'll talk about the mutation system, and the composition approach I took while building the game.
-
-Everything in the game can mutate, be it weapons, npcs, enemies, and even the entire dungeon you play in. Mutations are driven by the player's actions throughout a run.
-This system is in the game, and it works, but due to the time constraints I put for myself to finish the game, and the difficulty of authoring, and setting up the mutations in game (I kind of made the entire process difficult here), I opted to not add any.
-
-But even though the system doesn't have any effect on the game currently, from the little testing I did while working on it, these mutations can create some really interesting scenarios, but you'd have to be very careful, and test very frequently to create something fun, predicatable and engaging.
-
-Every component is made to work with any "agent" (Called "character" internally) by agent I mean a character that thinks and executes logic (player, enemies, npcs, weapons, etc...).
-The same weapons that you use during your run, are also used by the enemies, the same components the player uses to move, aim, shoot, etc... are also used by the enemies.
-
-I wanted to try this composition approach as I was really inspired by the way godot's nodes work, and how they encourage this composition approach to building stuff. Anything can be created by composing these components and tweaking their properties.
-- [Itch page (Play it)](https://logmoon.itch.io/corpus)
-
-### [Entity Component System in C99](https://logmoon.github.io/projects/Entity_Component_System_in_C99.html)
-Tags: Plugin, C
-This is a very simple and basic Entity Component System I wrote in C99.
-I wrote this as a learning experience, and so I can use it in the engine I was working on at the time, you can check that out [here](https://github.com/logmoon/Nyx-Engine/tree/main).
-- [Github (Source Code)](https://github.com/logmoon/C-Entity-Component-System/tree/main)
-
-### [Fragmented](https://logmoon.github.io/projects/Fragmented.html)
-Tags: 2D Game, Godot, Global Game Jam
-Made for the Global Game Jam 2026 in 48~ish hours, it's a top down endless hoarde bullet hell inspired by [Devil Daggers](https://devildaggers.com/) and [Xayah](https://www.leagueoflegends.com/en-us/champions/xayah/)'s moveset from [league of legends](https://www.leagueoflegends.com/).
-
-The jam theme was MASK, which led us to design a core mechanic where the player’s mask represents both health and offense. Attacking requires throwing shards of the mask, costing 1 HP per shard. The only way to recover health is by recalling previously thrown shards and hitting enemies with them, creating a constant risk-reward loop.
-
-That mechanic is the core of the experience, and I basically designed everything in the game around it. From early playtests during development, the most common feedback we received was that the gameplay felt addictive, which was exactly what we were aiming for.
-
-I took charge of managing the team which was composed of [Chaima Naili](https://www.linkedin.com/in/chaima-naili-56192621a/) and [Abdenour Ben Taieb](https://www.facebook.com/abdenour.bentaieb.2025), both beginners to game dev who joined to learn, and Aymen Sliti an experienced godot developer.
-
-I was the main programmer and game designer, created most of the sound effects, and contributed to basically everything during development. Aymen handled animation and lead art while assisting with code, Chaima worked on story and art, and Abdenour focused on UI and helped implement early gameplay systems.
-- [Global Game Jam (Play it)](https://globalgamejam.org/games/2026/fragmented-9)
-- [Itch (Play it)](https://logmoon.itch.io/fragmented)
-- [Source Code (I don't recommend looking at ts lol)](https://github.com/logmoon/ggj_game)
-
-### [Immersive Sim in Godot](https://logmoon.github.io/projects/Immersive_Sim.html)
-Tags: 3D Game, Godot, Unity, TrenchBroom, GDScript
-I wanted to try [Godot 4](https://godotengine.org/), and I was inspired by retro fps games like Doom, and the immersive sim genre. And so, I made this. Currently it's nowhere near an immersive sim. But it was a good way to learn Godot. And I have to say, I really liked it!
-
-I created a little 3D to 2D exporter for this game using [Unity](https://unity.com/). It takes in a 3D model with animations, and generates sprite sheets for the animations in 5 directions along with normal maps for each frame of the sprite sheet.
-The generated sprite sheets and normal maps are then used in Godot along with a custom animator to animate characters.
-
-As well as trying out Godot, I also wanted to try out [TrenchBroom](https://trenchbroom.github.io/) which is a level editor for Quake-engine based games. That's how I made the map you walk around in the game!
-- [Itch (Play it)](https://logmoon.itch.io/immersive-sim-in-godot-4)
-
-### [InfoEncryptor](https://logmoon.github.io/projects/InfoEncryptor.html)
-Tags: Desktop Application, Python, Tkinter
-I've always wanted a way to locally and securely store my login credentials.I had already coded something that did this, and it was working alright, but on top of that I also wanted a way to archive and encrypt a bunch of my folders so I can easily and securely transfer them and back them up.
-
-That is why InfoEncryptor was created, I wanted a central hub that can securely store my data locally.
-
-The app allows for different users, you can create accounts, log into them, and encrypt data, the only way someone can access your data is if they know your password.
-Users and their data are stored locally inside a folder called user_data located in the root path of the application.
-
-- Encrypt folders securely.
-- View a list of all encrypted folders.
-- Decrypt folders and navigate to their locations directly from the application.
-- Detect and manage missing encrypted folders with ease.
-
-- Store and manage your login credentials securely.
-- Add, delete, and view login entries for various websites or services.
-- Copy email addresses and passwords to the clipboard with a single click.
-
-- Encryption keys are stored securely, encrypted with the user's master key, ensuring maximum security.
-- [Github (Source Code)](https://github.com/logmoon/InfoEncryptor)
-
 ### [MentAI](https://logmoon.github.io/projects/MentAI.html)
 Tags: AI Health Assistant, Web Application, Django, Python, Langchain, Multi-Agent AI, Javascript, HTMX, HTML/CSS, Tailwind
 mentAI was a project I worked on for the EMBS competition hosted by IEEE as part of the TSYP initiative. It’s a web application designed to be a personalized AI mental health companion and assistant, and I was lucky to be part of such an incredible team ([Gaith Fdaoui](https://www.linkedin.com/in/ghayth-fdaoui-b67283203/), [L'Aljane Med Amine](https://www.linkedin.com/in/almedamine/), and [Mohamed Amine Abid](https://www.linkedin.com/in/mohamed-amine-abid-a419b318b/))
@@ -203,41 +101,6 @@ You can also record video sessions where you talk about what’s on your mind, a
 
 All in all, working on mentAI was an amazing experience. It pushed me to learn and grow in ways I hadn’t imagined, and I’m proud of what we accomplished as a team.
 - [Github Repo](https://github.com/IEEE-TEK-UP-Student-Branch/TSYP12-EMBS-CHALLENGE/tree/main)
-
-### [Muscle Memory](https://logmoon.github.io/projects/Muscle_Memory.html)
-Tags: Mobile App, React Native, Javascript, Expo
-I recently started going to the gym, and I found myself always forgetting what exercices I did, and how much weight/sets/reps I did for each. I swear, I have this constant memory leak in my brain, and whenever it gets potent in a certain area, I usually just build an app to help me.
-
-On the other hand, I've also always wanted to try out react native, I've tried flutter before and it was fun, but I didn't want to use it again, just for the sake of learning a new tool. So I decided to kill two birds with one stone, and build an app that will help plug the constant memory leak in my brain, and learn React Native!
-
-What I ended up with is a really simple workout tracker, where I can create workouts, and exercices within those workouts, I can log the sets, weights and reps within the exercice and even attach an image or take a picture of the exercice just in case it's a machine that I might forget.
-- [Github (Source Code)](https://github.com/logmoon/muscle-memory)
-
-### [Nyx Engine](https://logmoon.github.io/projects/Nyx_Engine.html)
-Tags: 2D Game Engine, C, SDL2
-This was an attempt at creating a 2D game engine from scratch using the C programming language along with SDL. It was actually my second attempt creating something like this, you can check out how my first attempt went [here](https://github.com/logmoon/C-Game-Engine-from-scratch).
-
-Everything was coded from scratch as a learning experiment, it featured:
-- An Entity Component System
-- 2D Physics
-- Scenes
-- Rendering using SDL
-- Audio using SDL
-- IO
-- Menus
-And a bunch more stuff, you can browse the source code from the link above.
-- [Github (Source Code)](https://github.com/logmoon/Nyx-Engine/tree/main)
-
-### [Obsidians Website](https://logmoon.github.io/projects/Obsidians_Website.html)
-Tags: Nextjs, Web Application, Netlify, CI/CD, Javascript, HTML/CSS, Tailwind
-The official website for the Obsidians team, a group of engineers and builders creating competitive fighting robots. The goal of the project was to deliver a fast, clean, and maintainable website that clearly presents the team, their work, and their identity.
-
-I built it using Nextjs and tailwind, focusing on clean UI, fast load times, and good responsiveness across devices, ensuring optimized SEO was also a priority, through semantic HTML, proper metadata, image optimization, fast load times, and strong Core Web Vitals, using static generation where possible to improve performance and search visibility.
-
-Development involved a lot of back-and-forth with the team to refine the layout, content structure, and visual direction until we reached the final result.
-
-To make the site easy to maintain long-term, I integrated Netlify CMS, allowing the team to manage content without touching the codebase. The website is deployed and hosted on Netlify, using its CI/CD pipeline for fast, reliable builds and updates.
-- [Website](https://obsidiansteam.com)
 
 ### [rAIs](https://logmoon.github.io/projects/rAIs.html)
 Tags: 3D Interactive, Artificial Intelligence, Unity, Python, C#, Blender, RAG, Langchain, Photoshop
@@ -298,26 +161,6 @@ When I push to GitHub, everything is done automatically. We first run the tests 
 React Native with Expo, TypeScript, Supabase for the backend (PostgreSQL, Storage, Realtime, Edge Functions), custom JWT auth, and EAS for builds and updates.
 - [Github (Source Code)](https://github.com/logmoon/Location-Majdi-Ben-Aissa)
 
-### [RogueDeff](https://logmoon.github.io/projects/RogueDeff.html)
-Tags: 2D Game, Unity, C#, Game jam
-This is a little game I made for the [mix and jam 2020 game jam](https://itch.io/jam/mix-and-game-jam-2020), it was made in 48 hours, using the Unity game engine. It's a top down, rogue-like, tower defence, dungeon crawler that takes place in procedurally generated dungeons. In addition to this, the player's main two mechanics are a grappling hook for navigation and the ability to pickup enemies.
-You cannot attack in this game. But your turrets can.
-- [Itch (Play it)](https://logmoon.itch.io/roguedeff)
-- [Jam Submission Page](https://itch.io/jam/mix-and-game-jam-2020/rate/822506)
-
-### [Skin Vault](https://logmoon.github.io/projects/SkinVault.html)
-Tags: React, Vite, Javascript, Steam Marketplace API, Web Application, Data Tracking
-A simple CS2 inventory price tracker I built to keep track of my item “investments” and see whether I’m actually making profit or just coping.
-
-It pulls price data directly from the Steam Marketplace, accounts for Steam tax automatically, and lets you monitor how your items perform over time.
-
-All data is stored locally in the browser, with export/import support so you don’t lose your portfolio. Right now it only runs locally since I’m using a Vite dev server proxy to access the Steam Marketplace API.
-
-I got back into Counter-Strike, found some old cases from my CSGO days, traded them for skins, and slowly fell into the whole skins marketplace rabbit hole. Tracking purchases manually got annoying fast, so I built my own tool.
-
-There are platforms that do this way better (like [Pricempire](https://app.pricempire.com/)), but this one’s mine. I can tweak it however I want, experiment with features, and use it exactly the way I need.
-- [Github Repo](https://github.com/logmoon/SkinVault)
-
 ### [Stock Boy](https://logmoon.github.io/projects/Stock_Boy.html)
 Tags: 2D Game, Unity, C#
 Stock Boy is a 2D action-adventure side-scrolling game I developed using the Unity game engine. This project marked my first experience working with a team, where I took on the role of lead developer and was the sole in-engine programmer. It was an incredible learning experience, and I had a blast bringing the game to life.
@@ -327,18 +170,6 @@ Although I can't disclose too much about the game's details, as it's not my inte
 These do not represent the final product, the game is still under development.
 - [Website](https://novelbomb.com/stock-boy)
 - [Itch (Play Demo)](https://novel-bomb.itch.io/stock-boy)
-
-### [Tasker](https://logmoon.github.io/projects/Tasker.html)
-Tags: Desktop Application, Unity, C#
-I was having trouble focusing on my studying. So I coded this simple app! It asks you for a task, and it's duration. And tracks how many tasks you completed! You can even listen to some relaxing rain or fireplace ambient white noise while doing your task.
-- [Github (Source Code)](https://github.com/logmoon/Tasker)
-- [Itch](https://logmoon.itch.io/tasker)
-
-### [The Creature Said Deeper](https://logmoon.github.io/projects/The_Creature_Said_Deeper.html)
-Tags: 2D Game, Unity, C#, Game jam
-The creature said deeper is a fun game I made for the [ludum dare 48 game jam](https://ldjam.com/events/ludum-dare/48), as per the jam rules, the game was created in 48 hours using the Unity game engine. It's a top down point and click game with a very goofy story that accompanies the gameplay.
-- [Itch (Play on the web)](https://logmoon.itch.io/the-creature-said-deeper)
-- [Ludum Dare](https://ldjam.com/events/ludum-dare/48/the-creature-said-deeper)
 
 ### [The Lost Hope](https://logmoon.github.io/projects/The_Lost_Hope.html)
 Tags: 2D Game, Monogame, C#
@@ -376,39 +207,6 @@ I'll be back on this project when the time is right. The world and mechanics tha
 I plan to allocate a year or two to this project when things get a little settled down in the future, hopefully with a proper team to help out.
 - [Github (Source Code)](https://github.com/logmoon/TheLostHope)
 - [Youtube Devlog Series](https://www.youtube.com/playlist?list=PLRI3RM3tSD-uK02pPdtGNgAcOGqOlZ_0g)
-
-### [Unity Animator 2D](https://logmoon.github.io/projects/Unity_Animator_2D.html)
-Tags: Plugin, Unity, C#
-I was sick of Unity's animator as a way to animate 2D Sprite Sheets. And so I wrote this in like a day. It's nothig crazy, you just define your animations, the frames of each animations, their durations, and it you want the frame to trigger an event. Give that config to the system, and you can play the animations, and listen to frame events.
-- [Github (Source Code)](https://github.com/logmoon/Unity-Animator2D)
-
-### [Unity Saving System](https://logmoon.github.io/projects/Unity_Saving_System.html)
-Tags: Plugin, Unity, C#
-This is an advanced saving system for Unity.
-It supports:
-- Multiple save files.
-- Saving and loading using an interaface.
-- Player prefs style of saving.
-- Unity editor utilities.
-- [Github (Source Code and Guide)](https://github.com/logmoon/Unity-Saving-System)
-
-### [Will it run?](https://logmoon.github.io/projects/Will_It_Run.html)
-Tags: 2D Game, C, Raylib, Game jam
-This is an interesting game I made for the [Ludum Dare 56 Game Jam](https://ldjam.com/events/ludum-dare/56), I coded the entire thing from scratch in C using Raylib as a backend, it was made in 72 hours "amidst a time of despair and misery" (quoted from the game page). It's a weird management game, where you basically get abducted by aliens and have to code apps for them while managing bugs that keep spawning in.
-
-Technically speaking, I'd say I managed to do quite a bit considering the time limit, even though the gameplay lacked a bit, it was still fun to code and a [massive](https://www.youtube.com/watch?v=ryNMM5pMPr0) learning experience. I basically created an entire programming language for the game, and created a whole fully functionning, and pretty feature rich text editor within the game, all with C mind you.
-
-For all the art and audio I had [my buddy](https://www.facebook.com/ghayth.fdaoui3) help me out, so credits to him for making the good look and sound good.
-- [Ludum Dare Page (Play it)](https://ldjam.com/events/ludum-dare/56/will-it-run)
-- [Source Code](https://github.com/logmoon/will-it-run-source)
-
-### [World Cup Power BI Dashboard](https://logmoon.github.io/projects/World_Cup_Power_BI_Dashboard.html)
-Tags: Power BI, Flask, Row-Level Security, Data Visualization, Business Intelligence, CI/CD, Python
-A little web application that exposes an interactive Power BI dashboard for analyzing World Cup performances. Users can explore key KPIs, visualize historical trends, and gain insights into team and player statistics through dynamic filtering and data exploration.
-
-One thing to note is that we also implemented Row-Level Security (RLS) to provide role-based access control. Different users see different slices of the data depending on their permissions. This was enforced both at the Power BI level (using dataset-level RLS rules) and at the application level.
-- [Github Repo](https://github.com/logmoon/world-cup-power-bi-dashboard)
-- [Hosted instance on render (probably won't work)](https://world-cup-power-bi-dashboard.onrender.com)
 
 
 ## Contact
