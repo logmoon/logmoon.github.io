@@ -20,6 +20,9 @@ I'm a software engineer and data science student driven by curiosity about how s
 
 ### Internship at SQUARE-IT (Jul 2025 - Sep 2025)
 Developed a comprehensive career management HRMS fullstack application. Gained hands-on experience in enterprise software development, database design, and collaborative development practices. Used ASP.NET for the backend and Angular for the frontend.
+- [Square-IT](https://www.linkedin.com/in/square-it-96b04b129/)
+- [Project Page](https://logmoon.github.io/projects/internship-hrms.html)
+- [Internship Report](https://logmoon.github.io/assets/files/docs/internship-hrms/hrms-internship-report.pdf)
 
 ### Freelance Game Developer (2021 - 2025)
 5-star rated on both Upwork and Fiverr, working on independent game projects and client work with a focus on quality, reliability, and clear communication.

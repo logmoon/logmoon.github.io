@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Internship - Career Management HRMS Platform</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>Internship - Career Management HRMS Platform</h2>
+    <div class="tags">
+        
+            <p class="tag">Web Application</p>
+        
+            <p class="tag">ASP.NET</p>
+        
+            <p class="tag">Angular</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/Career-Management-HRMS-App">Github (Source Code)</a>
+            </li>
+        
+            <li>
+                <a href="../assets/files/docs/internship-hrms/hrms-internship-report.pdf">Internship Report</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#career-intelligence">Career Intelligence</a><ul>
+<li><a href="#admin-dashboard">Admin Dashboard</a></li>
+<li><a href="#employee-dashboard">Employee Dashboard</a></li>
+</ul>
+</li>
+<li><a href="#core-features">Core Features</a></li>
+</ul>
+</li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>This was the main thing I worked on during my internship at <a href="https://www.linkedin.com/in/square-it-96b04b129/">Square-it</a> / <a href="https://www.linkedin.com/company/hrmaps/">HRMaps</a>. The idea is a career management module for an HRMS, essentially a system that helps companies manage employees' career progression, not just their basic info.</p>
+<p>The back-end is ASP.NET with a fairly layered architecture: controllers, services, DTOs, and a DbContext all living in their own lanes. The front-end is Angular with PrimeNG components and Tailwind for styling.</p>
+<h2 id="career-intelligence">Career Intelligence</h2>
+<p>What I'm probably most proud of is the intelligence layer I built, <code>CareerIntelligenceService</code>. It ties everything else together and makes the app actually <em>smart</em>. It analyzes each employee's performance reviews, skills, tenure, and career path data, then generates things like:<br />
+- Promotion readiness scores<br />
+- Attrition risk predictions<br />
+- Personalized skill development recommendations</p>
+<p>The dashboard is role-based. HR gets an org-wide view with talent risks and strategic recommendations, managers get team dynamics insights, and employees get their own career intelligence report, all from the same service.</p>
+<h3 id="admin-dashboard">Admin Dashboard</h3>
+<p><img alt="Admin Dashboard" src="../assets/images/projects/internship-hrms/dashboard_admin.png" /></p>
+<h3 id="employee-dashboard">Employee Dashboard</h3>
+<p><img alt="Employee Dashboard" src="../assets/images/projects/internship-hrms/dashboard_employee.png" /></p>
+<h2 id="core-features">Core Features</h2>
+<p>The rest of the app covers the full HRMS surface:<br />
+- Employee profiles with skills, experience, and education tracking<br />
+- Department and position management<br />
+- Performance reviews<br />
+- Succession planning<br />
+- Career path configuration<br />
+- An approval workflow for requests like promotions and department transfers</p>
+<p>The request system was fun to build. It's smart about roles, so a manager submitting a request on behalf of someone else skips straight to HR approval instead of going through the normal pending flow.</p>
+<h1 id="screenshots">Screenshots</h1>
+<p><img alt="Admin Dashboard" src="../assets/images/projects/internship-hrms/dashboard_admin.png" /><br />
+<img alt="Employee Dashboard" src="../assets/images/projects/internship-hrms/dashboard_employee.png" /><br />
+<img alt="Career Development" src="../assets/images/projects/internship-hrms/career_dev_open.png" /><br />
+<img alt="Positions" src="../assets/images/projects/internship-hrms/positions_open.png" /><br />
+<img alt="Employees" src="../assets/images/projects/internship-hrms/employees_open.png" /><br />
+<img alt="Performance Review" src="../assets/images/projects/internship-hrms/perf_review.png" /><br />
+<img alt="Succession Analysis" src="../assets/images/projects/internship-hrms/succ_analysis.png" /><br />
+<img alt="Skills Gap" src="../assets/images/projects/internship-hrms/skills_gap.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
