@@ -40,10 +40,10 @@ Always creating smaller projects to learn and understand why the technologies we
 
 ## Education
 
-### Data Science Engineering Degree - ESPRIT (2023 - Present)
+### Data Science Engineering Degree - ESPRIT (2023 - 2026)
 Currently pursuing an engineering degree in Data Science, focusing on machine learning, statistical analysis, and software engineering.
 
-### Pre-Engineering Degree - IPEIB (2020 - 2024)
+### Pre-Engineering Degree - IPEIB (2020 - 2023)
 Completed a multidisciplinary preparatory program with a strong foundation in mathematics, physics, and computer science, preparing for competitive engineering schools.
 
 
