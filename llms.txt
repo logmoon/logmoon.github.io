@@ -41,8 +41,8 @@ I'm a software engineer and data science student. I build AI-powered tools, game
 
 ## Education
 
-### Data Science Engineering Degree - ESPRIT (2023 - 2026)
-Final-year Data Science engineering student focused on machine learning, statistical analysis and software engineering. Currently working on my end-of-studies project (PFE).
+### Data Science Engineering Degree - ESPRIT (2023 - Present)
+Final-year Data Science engineering student focused on machine learning, statistical analysis and software engineering. Currently seeking an end-of-studies internship (PFE) starting January 2027.
 
 ### Pre-Engineering Degree - IPEIB (2020 - 2023)
 Multidisciplinary preparatory program in mathematics, physics and computer science, preparing for competitive engineering schools.
