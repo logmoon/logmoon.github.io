@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - DQN From Scratch</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>DQN From Scratch</h2>
+    <div class="tags">
+        
+            <p class="tag">Reinforcement Learning</p>
+        
+            <p class="tag">C</p>
+        
+            <p class="tag">Deep Q-Network</p>
+        
+            <p class="tag">Neural Networks</p>
+        
+            <p class="tag">Sokol</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/dqn-implementation-from-scratch">Github (Source Code)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#the-network">The Network</a></li>
+<li><a href="#the-dqn-parts">The DQN Parts</a></li>
+<li><a href="#training-curriculum">Training Curriculum</a></li>
+<li><a href="#running-it">Running It</a></li>
+<li><a href="#where-its-at">Where It's At</a></li>
+<li><a href="#showcase">Showcase</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>I wanted to actually understand reinforcement learning, and the computations that happen inside neural networks, we've already been taught the theory so I was familiar enough with the underlying math and architecture, but it wasn't enough. You have to get your hands dirty to truly understand how something works.</p>
+<p>It wouldn't be a truly from scratch project if it wasn't coded in C, and so that was my langauge of choice (shocker), it also helps that I already had a custom made C stack/framework I use for my games (an older version of it anyhow), so I'd get a game loop, rendering, hot reloading, a debug HUD, etc...</p>
+<p>Another restriction I put was AI help, I've decided to not use AI for any code or any help whatsoever, this was at a point where AI was starting to make me more and more lazy and stupid. So this was my chance to prove that I still got it.</p>
+<p>And thus the project was born, I'd create a pong game where the model learns to play against a simple opponent.</p>
+<h2 id="the-network">The Network</h2>
+<p>Everything is hand written:<br />
+- <strong>Inputs (6):</strong> ball x/y, ball velocity x/y, my paddle y, opponent paddle y<br />
+- <strong>Hidden layers:</strong> two layers of 64 neurons, ReLU (opted for 64 but it's adjustable)<br />
+- <strong>Outputs (3):</strong> move up, move down, do nothing</p>
+<p>The forward pass, the backprop, and all the gradient math were hand-written first on paper then in C with a fuck ton of back and forth. Weight init is Xavier/He, and gradients get clipped so a bad batch doesn't blow up training.</p>
+<h2 id="the-dqn-parts">The DQN Parts</h2>
+<p>I decided to go with DQN rather than a traditional RL approach, because it was the newer thing and another chance to learn.</p>
+<ul>
+<li><strong>Experience replay:</strong> a 150k entry buffer of state, action, reward, next state, sampled in random batches of 64.</li>
+<li><strong>Epsilon-greedy exploration:</strong> starts fully random and decays over time, so early on it's basically flailing around, and later it mostly trusts the network.</li>
+<li><strong>Target network:</strong> a frozen copy used to compute targets, synced every 1000 iterations. Without it, the network just chases its own tail.</li>
+<li><strong>Huber loss:</strong> squared error when the prediction is close, linear when it's way off, so a few terrible guesses don't hijack the whole update.</li>
+<li><strong>Reward:</strong> +0.5 for returning the ball, +1 for scoring, -1 for getting scored on. A point ends the episode.</li>
+</ul>
+<h2 id="training-curriculum">Training Curriculum</h2>
+<p>A cold start in Pong is brutal, the ball just flies past you every game and there's almost nothing to learn from. So training slowly ramps up instead:</p>
+<ul>
+<li>The opponent doesn't move at all for the first 5k iterations. It just stands there.</li>
+<li>From 5k to 20k it starts playing, but badly on purpose: slow, delayed reactions, and it makes mistakes that taper off as training goes.</li>
+<li>Separately, the ball spawns aimed at the model early on, with that bias decaying over the first 25k iterations. So the model gets a bunch of balls it can actually reach while it's still clueless.</li>
+</ul>
+<p>By the time the curriculum is over, both paddles are playing for real.</p>
+<h2 id="running-it">Running It</h2>
+<ul>
+<li>Toggle between train and play mode whenever. In play mode you take over the left paddle, epsilon drops to 0, and the model plays for real, no random moves.</li>
+<li>Save and load the model to <code>pong_model.bin</code> while it's running.</li>
+<li>The HUD shows mean error, iteration, current epsilon, replay buffer fill, and a countdown to the next target network sync.</li>
+</ul>
+<h2 id="where-its-at">Where It's At</h2>
+<p>It worked when I first finished it around a year ago, the model learns consistently to return and track the ball, and it converges well. But my current testing as I write this didn't give good results, I did experiment and tweak a bunch of things last year that seem to have made it not perform so well anymore, and I don't want to bother fixing it right now.</p>
+<p>Either way what should be taken from this experiemnt is the implementation of the DQN algorithm and the neural network math, so if you take anything out of this project it's that. Also, you can see the results I got down bellow in the <a href="#showcase">Showcase section</a>.</p>
+<h2 id="showcase">Showcase</h2>
+<div class="video-wrapper"><video controls style="width:35%"><source src="../assets/images/projects/dqn/ig_post.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+<details class="spoiler">
+<summary>Spoiler</summary>
+<div class="spoiler-content">
+<blockquote>
+<p><strong>How it felt getting that result initial result:</strong><br />
+<img alt="shocked_pc" src="../assets/images/memes/shocked_pc.jpg" /></p>
+</blockquote>
+</div>
+</details>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

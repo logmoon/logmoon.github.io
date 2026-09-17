@@ -38,8 +38,6 @@
     <h2>ABSA Pipeline</h2>
     <div class="tags">
         
-            <p class="tag">Python</p>
-        
             <p class="tag">NLP</p>
         
             <p class="tag">Deep Learning</p>
@@ -47,6 +45,10 @@
             <p class="tag">BERT</p>
         
             <p class="tag">HuggingFace</p>
+        
+            <p class="tag">PyTorch</p>
+        
+            <p class="tag">Python</p>
         
     </div>
     </div>
@@ -88,9 +90,9 @@
 <h2 id="how-it-works">How It Works</h2>
 <p>It's a two stage pipeline, each stage is its own fine-tuned <code>bert-base-uncased</code> model.</p>
 <p>Both models were fine-tuned on the <a href="https://github.com/siat-nlp/MAMS-for-ABSA">MAMS</a> dataset with extra training examples pulled from <a href="https://aclanthology.org/S14-2004/">SemEval-2014 Task 4</a> (laptops + restaurants).</p>
-<p><strong>Stage 1 — Aspect Span Extraction</strong></p>
+<p><strong>Stage 1: Aspect Span Extraction</strong></p>
 <p>The first model is a token classifier. It reads the review and tags every single token with one of three labels: <code>B-ASP</code> for the beginning of an aspect term, <code>I-ASP</code> for the continuation of one, and <code>O</code> for everything else. This is called the BIO scheme. Contiguous <code>B</code> and <code>I</code> tokens get merged into a single aspect term, so something like <code>["battery", "life"]</code> becomes <code>"battery life"</code>.</p>
-<p><strong>Stage 2 — Sentiment Classification</strong></p>
+<p><strong>Stage 2: Sentiment Classification</strong></p>
 <p>The second model takes each extracted aspect and classifies the sentiment toward it, and the trick here is rather than feeding just the review, you feed it as a sentence pair: <code>[CLS] review text [SEP] aspect term [SEP]</code>. This lets the model attend to the review in the context of a specific aspect.</p>
 </article>
 

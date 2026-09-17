@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - CredVault</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>CredVault</h2>
+    <div class="tags">
+        
+            <p class="tag">Rust</p>
+        
+            <p class="tag">Tauri</p>
+        
+            <p class="tag">Encryption</p>
+        
+            <p class="tag">Desktop Application</p>
+        
+            <p class="tag">CI/CD</p>
+        
+            <p class="tag">React</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/credvault">Github (Source Code)</a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/logmoon/credvault/releases">Github Releases (Download)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#what-it-does">What It Does</a></li>
+<li><a href="#sync-without-a-server">Sync Without a Server</a></li>
+<li><a href="#security">Security</a></li>
+<li><a href="#the-vault-file">The Vault File</a></li>
+<li><a href="#built-with-create-project">Built With create-project</a></li>
+<li><a href="#shipped-and-installable">Shipped and Installable</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>CredVault is a local-first, zero-knowledge credential manager. One encrypted file, one master password, no accounts, no servers.</p>
+<p>It's the iteration of a several attempts to create a clean and secure password manager, one of these published initial iterations is <a href="InfoEncryptor.html">InfoEncryptor</a>. This is I'd say the password manager I actually wanted, it follows the same philosophy as my previous iterations (such as <a href="InfoEncryptor.html">InfoEncryptor</a>) which is that every mainstream option either runs a server that holds your credentials or ships a browser extension with a big attack surface. CredVault skips both: your vault is a single encrypted file on your own disk, and the app makes no network calls at all.</p>
+<h2 id="what-it-does">What It Does</h2>
+<ul>
+<li>Create and unlock a vault with one master password</li>
+<li>Add, edit, and delete credentials: title, username, password, URL</li>
+<li>One-click copy for username or password, with the clipboard auto-clearing after a configurable timeout, countdown included</li>
+<li>Built-in password generator, length 8-64, pick your character sets</li>
+<li>Auto-lock after inactivity</li>
+<li>Instant client-side search</li>
+<li>Passwords are hidden by default, reveal with the eye toggle or copy without ever seeing them</li>
+</ul>
+<h2 id="sync-without-a-server">Sync Without a Server</h2>
+<p>There's no sync service. You point the vault path at a folder you already sync, like Dropbox, iCloud or Google Drive, and the provider moves an encrypted blob it can't read. If two devices end up with different versions, you get a simple prompt: keep this device's vault or keep the cloud copy.</p>
+<h2 id="security">Security</h2>
+<ul>
+<li>Argon2id (64 MB memory cost) derives the key, AES-256-GCM encrypts the vault</li>
+<li>The master password is never stored, and the derived key is zeroed from memory right after each operation</li>
+<li>All crypto happens in Rust. The frontend never sees a key, a salt, or a raw cipher primitive</li>
+<li>A wrong password fails the auth tag, so it never returns partial or garbage data</li>
+<li>Writes are atomic: crash mid-save and the vault is still intact</li>
+<li>No telemetry, no network calls</li>
+</ul>
+<p>And there's no password recovery, by design. Forget the master password and the data is gone, for anyone. The app tells you that once, clearly, and then it's on you.</p>
+<h2 id="the-vault-file">The Vault File</h2>
+<p><code>.cvault</code> is a versioned binary format: a plaintext header (magic bytes, Argon2 parameters, salt, timestamps) followed by an encrypted JSON payload. The format is documented in the repo, so if this app stopped existing tomorrow, you could still decrypt your vault with standard CLI tools. That was a goal from day one, no lock-in to my own app.</p>
+<h2 id="built-with-create-project">Built With create-project</h2>
+<p>This one means a lot to me, because it was built entirely through <a href="create-project.html">create-project</a>'s workflow. Every session started by restoring memory and context, every feature started with <code>/architect</code> and an approved plan, review ran before close-out, and the invariants and UI rules held from the first commit to the v0.1.1 release. No re-briefing the agent, no decisions getting forgotten. It's the best proof I have that this system works on a real project, not just a toy.</p>
+<h2 id="shipped-and-installable">Shipped and Installable</h2>
+<p>v0.1.1 is out with installers for Linux (<code>.deb</code>, <code>.rpm</code>, <code>.AppImage</code>) and Windows (<code>.msi</code> and an NSIS <code>.exe</code>). The CI pipeline gates release builds behind checks and keeps the Arch PKGBUILD checksum in sync, so you can build it from source on Arch today. AUR and macOS builds are still on the list, the latter just needs a Mac I don't have. GPL-3.0 licensed.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p><img alt="screenshot" src="../assets/images/projects/credvault/main.png" /><br />
+<img alt="screenshot" src="../assets/images/projects/credvault/1.png" /><br />
+<img alt="screenshot" src="../assets/images/projects/credvault/2.png" /><br />
+<img alt="screenshot" src="../assets/images/projects/credvault/3.png" /><br />
+<img alt="screenshot" src="../assets/images/projects/credvault/4.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

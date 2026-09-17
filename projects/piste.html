@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - piste</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>piste</h2>
+    <div class="tags">
+        
+            <p class="tag">OpenCode</p>
+        
+            <p class="tag">AI Agents</p>
+        
+            <p class="tag">Developer Tooling</p>
+        
+            <p class="tag">Git</p>
+        
+            <p class="tag">CLI</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/piste">Github (Source Code)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#why">Why</a></li>
+<li><a href="#whats-in-it">What's In It</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#install">Install</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>piste is a small glue layer you install into a project you're already working on. It doesn't replace how you do anything, it just adds a handful of commands, agents, and skills to opencode so you and your agents can work on tickets, review PRs and write them without the usual mess.</p>
+<p>I built it for ongoing group projects: tickets coming in, PRs going out, more than one person touching the code.</p>
+<h2 id="why">Why</h2>
+<p>When you're the only one on a repo, you can keep the whole process in your head. In a group project you can't, and neither can an agent. Everyone needs the same rhythm: plan before writing code, review before merge, and PRs that explain themselves.</p>
+<p>I wanted that rhythm available without adopting some heavy framework, so piste stays deliberately small:<br />
+- Installs by copying files in, and never overwrites what already exists<br />
+- No ticket files, no worktrees, no JSON config<br />
+- Permissions live in each agent's own frontmatter<br />
+- The <code>AGENTS.md</code> skeleton is filled in by <code>/setup</code> on the first run</p>
+<p>If I end up missing something, I'll add it then, not before.</p>
+<h2 id="whats-in-it">What's In It</h2>
+<p>Commands:<br />
+- <code>/setup</code>: explores the repo (stack, real test/lint/build commands, folder layout) and fills in <code>AGENTS.md</code>. Safe to re-run, it refines instead of clobbering your edits.<br />
+- <code>/work "&lt;ticket&gt;"</code>: always runs in plan mode. Proposes a phased plan and stops. It doesn't touch a file until you switch to build.<br />
+- <code>/review-pr</code>: reviews a diff using the checklist. Depth is calibrated to risk: a fast pass on the mechanical stuff, a real deep look at anything touching auth, payments, migrations, or anything it isn't confident about. Any Blocker gets verified by a second, context-free agent before it reaches you, so a false positive doesn't show up labeled as fact.<br />
+- <code>/write-review</code>: drafts the actual review in my voice, shows it, and only posts it once I say so.<br />
+- <code>/describe-pr</code>: drafts a PR description from the real diff (Problem → What this does → Verification → Reviewer notes). Doesn't open the PR on its own.</p>
+<p>Agents:<br />
+- <code>reviewer</code>: read-only by design. It can report a problem but never fix it, because a silent fix hides a disagreement someone should see.<br />
+- <code>verifier</code>: the fresh-eyes check on Blockers. It gets the diff and one claim, no reasoning attached, and decides whether it's actually real.</p>
+<p>Skills: <code>plan-quality</code>, <code>git-workflow</code>, <code>pr-review</code> (with a reference checklist), and <code>pr-writing-style</code>.</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>No stack-specific skills on purpose. <code>/setup</code> covers how a repo actually works, and anything deeper is better sourced per project than baked in here.</li>
+<li><code>.opencode/skills/</code> and <code>.claude/skills/</code> are interchangeable, so community skills drop in without changes.</li>
+</ul>
+<h2 id="install">Install</h2>
+<pre class="codehilite"><code class="language-bash">./install.sh /path/to/your-project
+cd /path/to/your-project
+opencode
+</code></pre>
+
+<p>Then run <code>/setup</code> inside opencode and give it a one-line description of the project if it asks. From there, new work starts with <code>/work</code>, and PRs go through <code>/review-pr</code> before merge.</p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

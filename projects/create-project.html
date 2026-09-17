@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - create-project</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>create-project</h2>
+    <div class="tags">
+        
+            <p class="tag">AI Agents</p>
+        
+            <p class="tag">Developer Tooling</p>
+        
+            <p class="tag">OpenCode</p>
+        
+            <p class="tag">Node.js</p>
+        
+            <p class="tag">CLI</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div>
+        <h3>Links</h3>
+        
+            <li>
+                <a href="https://github.com/logmoon/create-project">Github (Source Code)</a>
+            </li>
+        
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#why">Why</a></li>
+<li><a href="#credit">Credit</a></li>
+<li><a href="#what-gets-created">What Gets Created</a></li>
+<li><a href="#how-a-session-goes">How a Session Goes</a></li>
+<li><a href="#built-with-it">Built With It</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#running-it">Running It</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>create-project is a CLI that scaffolds an OpenCode-first project. You run it, answer three questions, and it sets up the operating system your coding agent works inside: structured context files, automatic memory between sessions, and a vendored set of skills.</p>
+<p>It doesn't pick a framework, install dependencies, or write boilerplate code. It handles the stuff that makes working with an agent consistent across sessions, so you don't have to be the one holding all the state in your head.</p>
+<h2 id="why">Why</h2>
+<p>The usual failure mode with coding agents isn't bad code in a single turn. It's drift. A decision gets forgotten, the UI starts going in all directions, architecture gets re-litigated, and every session begins with a paragraph of re-explaining.</p>
+<p>Fixing that isn't about a better prompt. It's about the boring infrastructure: memory, context, review discipline, git, and a session protocol. That's what this automates.</p>
+<h2 id="credit">Credit</h2>
+<p>This is a more refined and focused take on the system <a href="https://jsmastery.com/">JS Mastery</a> lays out in <a href="https://www.youtube.com/watch?v=9dKA2hq4vf0&amp;t=78s">How Senior Engineers Actually Build with AI in 2026</a>. Most of the skills are forked from his <a href="https://github.com/JavaScript-Mastery-Pro/skills">skills repo</a> and edited to fit this workflow, plus a few originals (<code>ui-ux-frontend</code>, <code>debug</code>, <code>test</code>, <code>document</code>).</p>
+<h2 id="what-gets-created">What Gets Created</h2>
+<ul>
+<li><code>AGENTS.md</code>: read by the agent first, every session</li>
+<li><code>opencode.json</code>: instructions, permissions, and the read-only reviewer subagent</li>
+<li><code>context/*.md</code>: project overview, architecture, build plan, progress tracker, code standards, library docs, plus UI files if it's a UI project</li>
+<li><code>memory.md</code> and <code>memory-log.md</code>: current session state, and a rolling log of past sessions</li>
+<li><code>.opencode/plugin/memory-hook.js</code>: restores memory automatically at session start</li>
+<li><code>.opencode/skills/</code>: context-gather, architect, remember, review, debug, test, document, imprint, ui-ux-frontend, distill</li>
+</ul>
+<p>Everything under <code>context/</code> starts as a stub, and nothing gets built on stub content.</p>
+<h2 id="how-a-session-goes">How a Session Goes</h2>
+<p>On the first session, the agent notices the context files are placeholders and runs an interview, one question at a time, pushing back on vague answers until every file has real content. That's the context gate.</p>
+<p>After that:<br />
+1. The memory hook restores the last session's state before your message even lands, and the agent summarizes what it restored.<br />
+2. You say what you want built.<br />
+3. <code>/architect</code> plans it and waits for your approval. No code before that.<br />
+4. The agent builds.<br />
+5. <code>/test</code> and <code>/review</code>: review runs in a fresh subagent with a clean context window and no write access. It reports issues, it never fixes them. The session that wrote the code is the worst judge of whether it's right.<br />
+6. You test it and report back.<br />
+7. Close-out: commit the work, run <code>/imprint</code> if UI was built, <code>/remember save</code>, and propose a <code>distill</code> if something from the session is worth turning into a skill.</p>
+<p>The human owns four gates: approving the plan, confirming the build works, confirming close-out, and approving any distill proposal. Everything else the agent reaches for on its own when the work calls for it.</p>
+<h2 id="built-with-it">Built With It</h2>
+<p>The best way to see what this produces is <a href="credvault.html">CredVault</a>, a local-first password manager I shipped through it. Every session ran the full loop: restore memory, plan with <code>/architect</code>, build, review, close out. The context files and invariants held up from the first commit to the v0.1.1 release.</p>
+<h2 id="options">Options</h2>
+<p>Three prompts at scaffold time:<br />
+- <strong>UI</strong>: adds design tokens, UI rules, a component registry, and the imprint + ui-ux-frontend skills<br />
+- <strong>Context7</strong>: adds the Context7 MCP server for indexed library docs<br />
+- <strong>git</strong>: initializes the repo and makes the first commit</p>
+<h2 id="running-it">Running It</h2>
+<pre class="codehilite"><code class="language-bash">npm install
+npm link
+create-project my-app
+cd my-app &amp;&amp; opencode
+</code></pre>
+
+<p>Then just start talking to the agent. There's no separate setup step.</p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

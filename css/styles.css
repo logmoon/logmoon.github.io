@@ -120,17 +120,82 @@ article img {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(23, 23, 23, 0.7), rgba(23, 23, 23, 0.75)), url('../assets/images/hero.gif');
+    position: relative;
+    overflow: hidden;
+    background: url('../assets/images/hero.gif');
     background-position: bottom;
     background-size: cover;
-    padding: 80px 20px;
+    padding: 96px 20px;
     text-align: center;
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
     max-width: 60%;
     margin: 0 auto;
     padding: 2rem;
+}
+
+.hero-moon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: min(95vh, 62vw, 980px);
+    aspect-ratio: 1;
+    transform: translate(48%, -50%);
+    pointer-events: none;
+}
+
+.hero-moon::before {
+    content: '';
+    position: absolute;
+    inset: -15%;
+    background: radial-gradient(circle, rgba(190, 235, 210, 0.12), rgba(190, 235, 210, 0) 65%);
+}
+
+.hero-moon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: contrast(0.96) drop-shadow(0 0 50px rgba(150, 220, 185, 0.14));
+}
+
+/* Scanlines, masked to the moon disc */
+.hero-moon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(3, 10, 7, 0.2) 0 1px,
+        rgba(3, 10, 7, 0.1) 1px 2px
+    );
+    clip-path: circle(50% at 50% 50%);
+    animation: crtFlicker 5s infinite;
+}
+
+@keyframes crtFlicker {
+    0%, 87%, 91%, 100% { opacity: 1; }
+    88% { opacity: 0.78; }
+    96% { opacity: 0.93; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-moon::after {
+        animation: none;
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(180deg, var(--dark-bg) 0%, rgba(25, 25, 25, 0) 10%),
+        linear-gradient(0deg, var(--dark-bg) 0%, rgba(25, 25, 25, 0) 10%),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.82) 0%, rgba(23, 23, 23, 0.68) 45%, rgba(23, 23, 23, 0.45) 100%);
 }
 
 .hero h1 {
@@ -483,7 +548,12 @@ a.tag:hover {
     }
 
     .hero {
-        padding: 60px 15px;
+        padding: 70px 15px;
+    }
+
+    .hero-moon {
+        width: 108vw;
+        transform: translate(51%, -50%);
     }
 
     .hero h1 {
@@ -897,6 +967,12 @@ details.spoiler .spoiler-content {
     margin-top: 0.3rem;
 }
 
+.cv-location {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.9rem;
+    margin-top: 0.15rem;
+}
+
 .cv-contact-details {
     display: flex;
     flex-direction: column;
@@ -979,6 +1055,14 @@ details.spoiler .spoiler-content {
 }
 
 .cv-timeline-content p {
+    margin-bottom: 0.5rem;
+}
+
+.cv-timeline-content p.cv-desc-line {
+    margin-bottom: 0.15rem;
+}
+
+.cv-timeline-content p.cv-desc-line:last-child {
     margin-bottom: 0.5rem;
 }
 

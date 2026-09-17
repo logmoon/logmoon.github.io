@@ -46,6 +46,8 @@
         
             <p class="tag">Library</p>
         
+            <p class="tag">Metaprogramming</p>
+        
     </div>
     </div>
     
@@ -79,22 +81,22 @@
 <p>ORMs ususally rely on a sort of reflection that's built into the language they're implemented in, but as we all know, C has no reflection, and the solution is and always will be <strong>macros!</strong>.</p>
 <p>It's been a priority for me in corm to keep the API as clean as possible for all users without any unnecessary fluff while at the same time not stealing control from users. It was quite the difficult line to walk, but I'd say I managed to deliver on both accounts, even if a little.</p>
 <p>Here's how you'd define a model:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">username</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">email</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_active</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="n">User</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-c">typedef struct {
+    int id;
+    char* username;
+    char* email;
+    int age;
+    bool is_active;
+} User;
 
-<span class="n">DEFINE_MODEL</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="p">,</span>
-<span class="w">    </span><span class="n">F_INT</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">PRIMARY_KEY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">AUTO_INC</span><span class="p">),</span>
-<span class="w">    </span><span class="n">F_STRING_LEN</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_NULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">UNIQUE</span><span class="p">),</span>
-<span class="w">    </span><span class="n">F_STRING</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_NULL</span><span class="p">),</span>
-<span class="w">    </span><span class="n">F_INT</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">),</span>
-<span class="w">    </span><span class="n">F_BOOL</span><span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">is_active</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
+DEFINE_MODEL(User, User,
+    F_INT(User, id, PRIMARY_KEY | AUTO_INC),
+    F_STRING_LEN(User, username, 50, NOT_NULL | UNIQUE),
+    F_STRING(User, email, NOT_NULL),
+    F_INT(User, age),
+    F_BOOL(User, is_active)
+);
+</code></pre>
 
 <p><code>DEFINE_MODEL</code> builds a static struct that holds each field's name, type, size, flags, and validator function pointer (if you want to supply one), the field macro are variadic.<br />
 The actual memory layout is figured out using <code>offsetof</code>, which is how CORM knows where each field sits inside your struct.</p>
@@ -106,7 +108,8 @@ The actual memory layout is figured out using <code>offsetof</code>, which is ho
 <h2 id="shortcomings">Shortcomings</h2>
 <p>There are no shortcomings, it's perfect.</p>
 <details class="spoiler">
-<p><summary>Spoiler</summary><div class="spoiler-content" markdown="1"></p>
+<summary>Spoiler</summary>
+<div class="spoiler-content">
 <p><img alt="why is he lying" src="https://i.kym-cdn.com/photos/images/original/003/074/378/d75.jpg" /></p>
 </div>
 </details>
