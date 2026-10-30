@@ -114,6 +114,43 @@ article img {
     height: auto;
 }
 
+/* Tables */
+article table {
+    border-collapse: collapse;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.95rem;
+    align-self: flex-start;
+}
+
+article th,
+article td {
+    padding: 0.45rem 1.1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--secondary);
+}
+
+article th {
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+article th:first-child,
+article td:first-child {
+    padding-left: 0;
+}
+
+article tbody tr:last-child td {
+    border-bottom: none;
+}
+
+article tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
 .article-title {
     text-align: center;
 }

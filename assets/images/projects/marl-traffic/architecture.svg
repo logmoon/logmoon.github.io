@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 660" width="900" height="660" role="img" aria-labelledby="t">
+  <title id="t">CoTrafficEnv sends states to LLMTeamController. Inside it, MaxPressure produces the base action every tick and the supervisor routes the due roles (Operator, Emergency, Pedestrian) whose directives the arbiter validates and clips, the directive layer applies them onto the base action, and the requested phase changes go back into the environment, where the safety shield has the last word.</title>
+  <defs>
+    <marker id="a" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L8 4 L0 8 z" fill="#333333"/>
+    </marker>
+  </defs>
+  <g font-family="Inter, system-ui, -apple-system, 'Segoe UI', sans-serif" stroke="#333333" stroke-width="1.5">
+
+    <rect x="290" y="30" width="320" height="58" rx="8" fill="#ffffff"/>
+    <text x="450" y="55" text-anchor="middle" font-size="15" font-weight="600" fill="#1f1f1f" stroke="none">CoTrafficEnv</text>
+    <text x="450" y="75" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">SUMO network, Intersection, safety shield</text>
+
+    <path d="M450 88 V162" fill="none" marker-end="url(#a)"/>
+    <text x="620" y="120" text-anchor="middle" font-size="11" fill="#666666" stroke="none">states, EVs, pedestrians, alerts</text>
+
+    <rect x="70" y="170" width="760" height="380" rx="10" fill="#fafafa" stroke-dasharray="6 4"/>
+    <text x="86" y="192" font-size="12.5" font-weight="600" fill="#1f1f1f" stroke="none">LLMTeamController</text>
+
+    <rect x="110" y="250" width="210" height="58" rx="8" fill="#ffffff"/>
+    <text x="215" y="275" text-anchor="middle" font-size="14" font-weight="600" fill="#1f1f1f" stroke="none">MaxPressure</text>
+    <text x="215" y="295" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">base action, every tick</text>
+
+    <rect x="390" y="230" width="300" height="140" rx="8" fill="#f2f2f2"/>
+    <text x="540" y="252" text-anchor="middle" font-size="14" font-weight="600" fill="#1f1f1f" stroke="none">Supervisor</text>
+    <text x="540" y="270" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">cadence and events, shared blackboard</text>
+
+    <rect x="403" y="282" width="88" height="52" rx="6" fill="#ffffff" stroke-width="1.2"/>
+    <text x="447" y="313" text-anchor="middle" font-size="12" fill="#1f1f1f" stroke="none">Operator</text>
+    <rect x="499" y="282" width="88" height="52" rx="6" fill="#ffffff" stroke-width="1.2"/>
+    <text x="543" y="313" text-anchor="middle" font-size="12" fill="#1f1f1f" stroke="none">Emergency</text>
+    <rect x="595" y="282" width="88" height="52" rx="6" fill="#ffffff" stroke-width="1.2"/>
+    <text x="639" y="313" text-anchor="middle" font-size="12" fill="#1f1f1f" stroke="none">Pedestrian</text>
+
+    <text x="540" y="354" text-anchor="middle" font-size="10.5" fill="#666666" stroke="none">Emergency schedule kept in code between calls</text>
+
+    <path d="M540 370 V392" fill="none" marker-end="url(#a)"/>
+
+    <rect x="390" y="400" width="300" height="58" rx="8" fill="#ffffff"/>
+    <text x="540" y="425" text-anchor="middle" font-size="14" font-weight="600" fill="#1f1f1f" stroke="none">Arbiter</text>
+    <text x="540" y="445" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">validate, clip, reject, warn</text>
+
+    <path d="M540 458 V476" fill="none" marker-end="url(#a)"/>
+
+    <rect x="390" y="480" width="300" height="68" rx="8" fill="#ffffff"/>
+    <text x="540" y="504" text-anchor="middle" font-size="14" font-weight="600" fill="#1f1f1f" stroke="none">DirectiveLayer</text>
+    <text x="540" y="522" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">bias, hold, preempt, serve_ped</text>
+    <text x="540" y="538" text-anchor="middle" font-size="11.5" fill="#5f5f5f" stroke="none">applied to the base action</text>
+
+    <path d="M215 308 V504 H386" fill="none" marker-end="url(#a)"/>
+    <text x="232" y="430" font-size="11" fill="#666666" stroke="none">base action</text>
+
+    <path d="M690 514 H790 V59 H614" fill="none" marker-end="url(#a)"/>
+    <text x="700" y="50" text-anchor="middle" font-size="11" fill="#666666" stroke="none">requested phase changes</text>
+
+    <text x="70" y="600" font-size="11" fill="#666666" stroke="none">No client, or a tick that raises: nothing gets installed and the base action leaves alone.</text>
+    <text x="70" y="620" font-size="11" fill="#666666" stroke="none">MaxPressure also runs standalone as the baseline arm.</text>
+
+  </g>
+</svg>

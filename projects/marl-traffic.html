@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - LLM Agents Traffic Controller (MARL)</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>LLM Agents Traffic Controller (MARL)</h2>
+    <div class="tags">
+        
+            <p class="tag">Python</p>
+        
+            <p class="tag">LLM</p>
+        
+            <p class="tag">SUMO</p>
+        
+            <p class="tag">Reinforcement Learning</p>
+        
+            <p class="tag">FastAPI</p>
+        
+            <p class="tag">React</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#three-roles-one-supervisor">Three Roles, One Supervisor</a></li>
+<li><a href="#making-it-fast">Making It Fast</a></li>
+<li><a href="#the-benchmark">The Benchmark</a></li>
+<li><a href="#where-were-at">Where we're at</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>This was one of my contributions on a currently ongoing project for the Advanced Data Science Project course at ESPRIT. We're building a traffic simulation harness on top of SUMO, with the signalised junctions of a real district in Tunisia, so every controller we write runs the same scenarios on the same network and can be put side by side. We tried different strategies to compare how they fare in different scenarios, from static ones, to reinforcement learned ones, we also tried LLMs, my contribution falls here, I proposed putting a team of language model agents in the loop instead of one model call per decision: three role agents for the routine phases, for emergency vehicles and for pedestrian requests, plus a supervisor that decides who runs on which tick, and a directive layer that resolves what they emit on top of a Max-Pressure static controller instead of letting it near the network.</p>
+<h2 id="three-roles-one-supervisor">Three Roles, One Supervisor</h2>
+<p>Routine phase decisions go to an Operator. Emergency vehicles get an Emergency role that plans a corridor and holds it open. Pedestrian requests get their own role, because a crossing request is a different question from a queue. They share a blackboard, and a supervisor decides who runs on which tick: a fixed cadence, plus events when a new EV enters the horizon, a conflict appears or the corridor changes. A role with nothing to do is not called.</p>
+<p>The roles return directives with a lifetime on them: bias, hold, preempt or serve_ped, each with the window it stays active for, then we have the directive layer that turns those into requested phase changes, resolved on top of the MaxPressure base, and the arbiter validates and clips them before they go anywhere. Nothing under the LLM package imports TraCI, so a bad answer can ask for a phase, it can't drive one, and the safety shield in the environment still gets the last word.</p>
+<p>The fallback is MaxPressure running when a call times out, comes back invalid or doesn't come back at all, and an episode with a lot of fallbacks isn't really measuring a language model anymore, which is why the fallback count gets reported with the results, along with a hard cap on calls per episode, the request timeouts and what each call cost.</p>
+<p><img alt="Architecture of the LLM team controller" src="../assets/images/projects/marl-traffic/architecture.svg" /></p>
+<h2 id="making-it-fast">Making It Fast</h2>
+<p>The first version was too slow to run a benchmark on. The obvious suspect was the prompt, and the recorded Monaco runs said no: a call came back with a median of 2,938 output tokens, 2,726 of them the model thinking before it answered, so roughly 190 tokens of actual answer. Time per call correlated 0.90 with output size and 0.05 with input size, so the 32k tokens of context going in weren't where the seconds were.</p>
+<p>Most of the calls were wasted anyway. In one Monaco seed the Emergency role ran 279 to 289 times and 44 to 51 of those (15 to 18 percent) actually changed something for an EV at a light, the rest repeated a schedule the model had already produced. With the thinking switched off those calls still cost about 7.3 s each against 2.3 s for Operator.</p>
+<ul>
+<li>Thinking off on routine ticks, and brief only when there's a conflict, an incident or congestion.</li>
+<li>The Emergency schedule kept in code between calls, with releases, extensions and shrinking applied directly instead of replanned by the model.</li>
+<li>Roles woken by what happens (a pedestrian waiting past 20 s, an EV entering the corridor) instead of by a timer.</li>
+<li>Less context per call: one copy of the blackboard, only EVs arriving within the next minute, only the next two or three lights on each EV's route, and each role seeing just the slice of the intersection it acts on.</li>
+</ul>
+<p>Across the full test matrix a full episode on the real district now runs 91 to 110 model calls, and every cell of the 3x3 grid stays under 50, after one setting moved: pedestrians checked every 60 s instead of the 30 I'd first set, with the 20 s wait still firing the event. One real 3x3 seed did 21 calls in 43.6 s of real time, half of them back in under 2 s and nine in ten under 2.6 s, about 2.2k input tokens a call and 1,448 output tokens for the whole episode. Re-running the seed on the recorded replies gives the same call count and the same token totals.</p>
+<h2 id="the-benchmark">The Benchmark</h2>
+<p>Every controller runs the same thing: the Tunisian district, 7 signalised junctions, medium demand, three scenarios (normal, emergency, incident), three seeds. Nine runs per controller, 27 in total.</p>
+<p>Mean over the three seeds:</p>
+<table>
+<thead>
+<tr>
+<th>scenario</th>
+<th>metric</th>
+<th style="text-align: right;">Max-Pressure</th>
+<th style="text-align: right;">single LLM</th>
+<th style="text-align: right;">LLM team</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>normal</td>
+<td>travel time</td>
+<td style="text-align: right;">109.27 s</td>
+<td style="text-align: right;">119.42 s</td>
+<td style="text-align: right;">109.01 s</td>
+</tr>
+<tr>
+<td>normal</td>
+<td>waiting time</td>
+<td style="text-align: right;">8.86 s</td>
+<td style="text-align: right;">16.36 s</td>
+<td style="text-align: right;">8.65 s</td>
+</tr>
+<tr>
+<td>emergency</td>
+<td>travel time</td>
+<td style="text-align: right;">109.46 s</td>
+<td style="text-align: right;">118.27 s</td>
+<td style="text-align: right;">108.90 s</td>
+</tr>
+<tr>
+<td>emergency</td>
+<td>waiting time</td>
+<td style="text-align: right;">9.01 s</td>
+<td style="text-align: right;">15.40 s</td>
+<td style="text-align: right;">8.61 s</td>
+</tr>
+<tr>
+<td>emergency</td>
+<td>EV delay</td>
+<td style="text-align: right;">22.36 s</td>
+<td style="text-align: right;">28.71 s</td>
+<td style="text-align: right;">21.87 s</td>
+</tr>
+<tr>
+<td>emergency</td>
+<td>EV travel time</td>
+<td style="text-align: right;">91.57 s</td>
+<td style="text-align: right;">98.12 s</td>
+<td style="text-align: right;">90.99 s</td>
+</tr>
+<tr>
+<td>incident</td>
+<td>travel time</td>
+<td style="text-align: right;">109.18 s</td>
+<td style="text-align: right;">119.52 s</td>
+<td style="text-align: right;">108.77 s</td>
+</tr>
+<tr>
+<td>incident</td>
+<td>waiting time</td>
+<td style="text-align: right;">8.97 s</td>
+<td style="text-align: right;">16.45 s</td>
+<td style="text-align: right;">8.65 s</td>
+</tr>
+</tbody>
+</table>
+<p>The middle column is the point. One model call per decision is worse than Max-Pressure everywhere: 10 s more travel time, waiting nearly doubled, emergency vehicles no better off. Throughput is flat across the three (3719 to 3732 cars an hour on normal), so the delay is the controller's doing, not a quieter network. The team lands level with Max-Pressure, a few tenths ahead at best. The model isn't what helps. The structure around it is.</p>
+<h2 id="where-were-at">Where we're at</h2>
+<p>This is still a work in progress as of the time of me writing this, but I still wanted to showcase it as it was interesting and fun to work on, and from what we've seen it's the solution that's giving the best results consistently. We'll most definitely iterate on it as we get closer to wrapping up the project.</p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

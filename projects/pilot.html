@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - Pilot - Internship Discovery & Application Pipeline</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>Pilot - Internship Discovery & Application Pipeline</h2>
+    <div class="tags">
+        
+            <p class="tag">Python</p>
+        
+            <p class="tag">LLM</p>
+        
+            <p class="tag">Playwright</p>
+        
+            <p class="tag">SQLite</p>
+        
+            <p class="tag">CLI</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#discovery-and-scoring">Discovery and Scoring</a></li>
+<li><a href="#tailoring">Tailoring</a></li>
+<li><a href="#applying">Applying</a></li>
+<li><a href="#where-its-at">Where It's At</a></li>
+</ul>
+</li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>Applying for internships is one loop repeated: find postings, work out which ones are worth reading, tailor a CV and a letter for the good ones, then fill in the same form you filled in last week, and each form is different and most of the times it'd be this tedious loop of creating an account, filling the same info, different steps for each one. Needless to say, it got old real fast, and so I built this little tool.</p>
+<p>It's a Python CLI over SQLite, config driven, typed with pydantic and covered by tests. Looking for a job is a bad moment to find out the tool quietly dropped half your applications.</p>
+<h2 id="discovery-and-scoring">Discovery and Scoring</h2>
+<p>The sources are the ones that don't need an account and don't involve scraping a logged-in session: curated application lists, the ATS boards companies actually use, and job boards for France and Tunisia. Everything normalises into one schema with dedupe keys, plus detection for ATS type, contract type, workplace and country, so we don't get the same posting twice.</p>
+<p>Every posting is scored against my profile by an LLM, with the reason stored next to the score. 1,417 postings scored against the current profile, 358 of them at 7.0 or above, and those are the ones that I care about.</p>
+<h2 id="tailoring">Tailoring</h2>
+<p>The CV facts are extracted from this website's own content, so the CV and the site can't drift apart. From those facts Pilot composes a per-application CV in English or French, renders it to docx, exports a PDF through LibreOffice, and writes a cover letter with a deterministic header and facts and a generated body.</p>
+<p>Anything generated passes a lint gate before it's kept: banned phrases, banned structures, dash abuse, and a comparison against samples of my own writing. If it trips the gate it gets one more try, then it's flagged for me instead of shipped.</p>
+<h2 id="applying">Applying</h2>
+<p>The browser layer is Playwright with a persistent profile, so a signed-in session survives between runs. Each provider gets its own route:</p>
+<ul>
+<li>In-site forms come out of the DOM, get mapped to my approved facts, get filled, and stay open on screen for review</li>
+<li>Email applications become <code>.eml</code> drafts ready to send</li>
+<li>Login walls are detected and reported, not brute forced</li>
+</ul>
+<p>Then I review, edit whatever I need and submit.</p>
+<h2 id="where-its-at">Where It's At</h2>
+<p>In use now, daily. It's built around just my own profile, and the choices inside it live in a config, I'm iterating on it as I use it.</p>
+<h1 id="screenshots">Screenshots</h1>
+<p><img alt="Scored jobs, ranked by fit score with work-policy and flags columns" src="../assets/images/projects/pilot/shot1.png" /></p>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>

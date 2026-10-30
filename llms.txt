@@ -3,7 +3,7 @@
 
 
 ## About
-I'm a software engineer and data science student. I build AI-powered tools, games, and the systems underneath them, from a C game engine and a DQN implemented by hand to a shipped encrypted desktop app and apps real people use. I like owning problems end to end and understanding why things work the way they do.
+I'm a software engineer and data science student driven by curiosity about how systems work at every level. I build games, tools, and applications while diving deep into the underlying technologies. I'm passionate about solving complex problems across different domains and creating software that delivers real value.
 
 
 ## Skills
@@ -19,9 +19,15 @@ I'm a software engineer and data science student. I build AI-powered tools, game
 
 ## Experience
 
+### Software Engineering Intern at Tanit Consulting AB (FrostLink) (Jul 2026 - Aug 2026)
+- Nine-week internship on FrostLink, a React Native and Expo app for skiers and snowboarders; three releases (1.1.2 to 1.1.4) went out during it, with part-time work after.
+- Rebuilt the trip-matching engine as a weighted score over seven dimensions with a broadening ladder and a 35% fit floor, and took the Firestore rules from a few permissive checks to 387 lines.
+- [FrostLink](https://frostlink.ski/)
+- [Project Page](https://logmoon.github.io/projects/frostlink.html)
+- [Internship Report](https://logmoon.github.io/assets/files/docs/frostlink/frostlink-internship-report.pdf)
+
 ### Internship at SQUARE-IT (Jul 2025 - Sep 2025)
-- Built a career-management module for the HRMaps HRMS during a 3-month internship, using ASP.NET (layered controllers, services, DTOs) and Angular with PrimeNG and Tailwind.
-- Implemented CareerIntelligenceService: turns performance reviews, skills and tenure into promotion-readiness scores, attrition-risk predictions and skill-gap recommendations across HR, manager and employee dashboards.
+- Built a career-management module for the HRMaps HRMS during a three-month internship in ASP.NET and Angular, including CareerIntelligenceService, which turns performance reviews, skills and tenure into promotion-readiness scores, attrition-risk predictions and skill-gap recommendations.
 - Designed a role-aware approval workflow where manager-initiated promotion and transfer requests skip the standard queue and route directly to HR.
 - [Square-IT](https://www.linkedin.com/in/square-it-96b04b129/)
 - [Project Page](https://logmoon.github.io/projects/internship-hrms.html)
@@ -48,6 +54,11 @@ Final-year Data Science engineering student focused on machine learning, statist
 Multidisciplinary preparatory program in mathematics, physics and computer science, preparing for competitive engineering schools.
 
 
+## Certifications
+- Building Transformer-Based Natural Language Processing Applications - NVIDIA (Oct 2026) - [https://learn.nvidia.com/certificates?id=V7aGcctBSbiRVU0ZWFwzUQ](https://learn.nvidia.com/certificates?id=V7aGcctBSbiRVU0ZWFwzUQ)
+- Hedera Certified Developer Associate (HCDA), Foundation (HCF) and Business Foundation (HBF) - Hedera Hashgraph (Oct 2026) - [https://certs.hashgraphdev.com/5fd31f8f-16b5-46dc-b8ba-9915ea991d08.pdf?v=e079e671](https://certs.hashgraphdev.com/5fd31f8f-16b5-46dc-b8ba-9915ea991d08.pdf?v=e079e671)
+
+
 ## Volunteering
 
 ### Game Jam Creator & Organizer (2025)
@@ -60,36 +71,34 @@ Maintained the chapter website and social media, and joined technical workshops 
 
 ## Projects
 
-### [CredVault](https://logmoon.github.io/projects/credvault.html)
-Tags: Rust, Tauri, Encryption, Desktop Application, CI/CD, React
-Local-first, zero-knowledge credential manager shipped as a Rust and Tauri desktop app: Argon2id and AES-256-GCM, one encrypted file, no network calls, installers for Linux and Windows via CI/CD.
-- [Github (Source Code)](https://github.com/logmoon/credvault)
-- [Github Releases (Download)](https://github.com/logmoon/credvault/releases)
+### [FrostLink](https://logmoon.github.io/projects/frostlink.html)
+Tags: React Native, TypeScript, Firebase, Expo, Mobile Development
+Nine-week internship at Tanit Consulting AB, July to August 2026: rebuilt the trip-matching engine, wrote the 387-line Firestore rules file, and built Piste, the review workflow I ran on 41 of my review passes.
 
-### [Rental Property Manager](https://logmoon.github.io/projects/rental-property-manager.html)
-Tags: React Native, TypeScript, Supabase, CI/CD, Mobile
-React Native and Supabase app used by 10 family members and agents to manage rental houses and bookings, with offline access, JWT auth, push notifications and an EAS CI/CD pipeline shipping over-the-air updates.
-- [Github (Source Code)](https://github.com/logmoon/Location-Majdi-Ben-Aissa)
+### [LLM Agents Traffic Controller (MARL)](https://logmoon.github.io/projects/marl-traffic.html)
+Tags: Python, LLM, SUMO, Reinforcement Learning, FastAPI, React
+A language model layer for traffic signals: three role agents, a supervisor, an arbiter and a safety shield on top of Eclipse SUMO, with the latency work and the benchmark against Max-Pressure on a real Tunisian district.
 
-### [rAIs](https://logmoon.github.io/projects/rAIs.html)
-Tags: Artificial Intelligence, Unity, C#, RAG, LangChain, Blender, Python, Photoshop
-AI president installation exhibited at TSYP12: a Blender-built 3D character in Unity with a custom lip-sync and expression system, driven by a Python RAG backend over speech-to-text and text-to-speech.
+### [Pilot - Internship Discovery & Application Pipeline](https://logmoon.github.io/projects/pilot.html)
+Tags: Python, LLM, Playwright, SQLite, CLI
+The tool I use to find and apply for internships: keyless discovery across job and ATS boards, LLM fit scoring against my own profile, per-application CV and cover-letter tailoring, and browser autofill that leaves the submit click to me.
 
 ### [DQN From Scratch](https://logmoon.github.io/projects/dqn-from-scratch.html)
 Tags: Reinforcement Learning, C, Deep Q-Network, Neural Networks, Sokol
 Deep Q-Network implemented from scratch in C on a custom Sokol game stack: hand-written forward pass and backprop, experience replay, target networks and a training curriculum, applied to Pong.
 - [Github (Source Code)](https://github.com/logmoon/dqn-implementation-from-scratch)
 
+### [CredVault](https://logmoon.github.io/projects/credvault.html)
+Tags: Rust, Tauri, Encryption, Desktop Application, CI/CD, React
+Local-first, zero-knowledge credential manager shipped as a Rust and Tauri desktop app: Argon2id and AES-256-GCM, one encrypted file, no network calls, installers for Linux and Windows via CI/CD.
+- [Github (Source Code)](https://github.com/logmoon/credvault)
+- [Github Releases (Download)](https://github.com/logmoon/credvault/releases)
+
 ### [Stock Boy](https://logmoon.github.io/projects/Stock_Boy.html)
 Tags: Unity, C#, Commercial Game, 2D Game, Team Lead
 Commercial 2D action-adventure in Unity, developed with Novel Bomb as sole in-engine programmer and lead developer on a 4-person team.
 - [Website](https://novelbomb.com/stock-boy)
 - [Itch (Play Demo)](https://novel-bomb.itch.io/stock-boy)
-
-### [create-project](https://logmoon.github.io/projects/create-project.html)
-Tags: AI Agents, Developer Tooling, OpenCode, Node.js, CLI
-CLI that scaffolds an opencode-first project with agent memory, context files and review workflow, the same workflow CredVault was built through.
-- [Github (Source Code)](https://github.com/logmoon/create-project)
 
 
 ## Contact

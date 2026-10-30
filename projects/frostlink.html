@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <!-- ------- -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Include Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Include Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>log.moon - FrostLink</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1><span class="accent-color">log.moon</span></h1>
+            <nav>
+                <a href="../index.html">home</a>
+                <a href="../projects.html">projects</a>
+                
+                <a href="../cv.html">cv</a>
+                <a href="../contact.html">contact</a>
+            </nav>
+        </header>
+        <main class="fade-in">
+            
+<article background-image: >
+    <div class="article-title">
+    <h2>FrostLink</h2>
+    <div class="tags">
+        
+            <p class="tag">React Native</p>
+        
+            <p class="tag">TypeScript</p>
+        
+            <p class="tag">Firebase</p>
+        
+            <p class="tag">Expo</p>
+        
+            <p class="tag">Mobile Development</p>
+        
+    </div>
+    </div>
+    
+    <hr>
+    <div class="toc"><span class="toctitle">Table Of Contents</span><ul>
+<li><a href="#project-description">Project Description</a><ul>
+<li><a href="#the-matcher">The Matcher</a></li>
+<li><a href="#the-rules">The Rules</a></li>
+<li><a href="#reviews-and-piste">Reviews, and Piste</a></li>
+</ul>
+</li>
+<li><a href="#stack">Stack</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="project-description">Project Description</h1>
+<p>FrostLink is a mobile app for skiers and snowboarders: you pick a trip and it puts you with people whose level, languages, budget and days line up. I interned on it at Tanit Consulting AB for nine weeks, July 1st to August 31st 2026, and stayed part time afterwards. Three versions went out while I was there, 1.1.2 through 1.1.4.</p>
+<p>I basically ended up touching everything in the app, we had tickets spanning bug reports to full on features, notably, I worked on the matching engine that matched skiers to trips created by other skiers, the Firestore security rules as when I started my work we didn't have any, and I also ended up creating an agentic review workflow as each ticket needed its own PR, and it needed to be reviewed by each team member before it can be merged into main.</p>
+<h2 id="the-matcher">The Matcher</h2>
+<p>The matcher I picked up answered yes or no. It compared you against whoever was already on the trip and returned a decision, which is fine when the answer is obvious and tells you nothing when it isn't, and most of the time it isn't.</p>
+<p>I rebuilt it as a weighted score over seven dimensions: skill at 30, language at 20, then it moved on to group preferences: budget, ride style, personality and distance, with a network bonus for skiers belonging to the same network. The dimensions don't share a unit, so each one is normalised to 0..1 before its weight applies.</p>
+<p>The search around it widens in steps: exact resort and dates, then dates plus or minus seven days, then radius at 50, 100, 200 and 400 km, then a last pass that drops the location and the age and gender filters. It stops once five results sit at or above the 35 percent score floor. Anything below the floor still comes back, sorted behind the recommended ones and marked as such.</p>
+<h2 id="the-rules">The Rules</h2>
+<p>As mentioned when I first started work on the project, it had no security rules, and it took a lot of trial and error to be able to introduce them in, I had to make sure the app behaved correctly with the new rules, and I had to do thorough testing with an emulator to achieve that. I also had to coordinate with my other teammates so that their work was still compatible with the new rules that were being introduced. By the end it was 387 lines, deny by default, every operation checking collection, ownership and membership, with about 150 emulator checks standing behind it.</p>
+<h2 id="reviews-and-piste">Reviews, and Piste</h2>
+<p>Every single ticket that we worked on went on its own branch and PR, and had to be reviewed, and approved by everyone before it could make its way into the main branch, this was tedious to do, especially with a lot of tickets, and the schema of the app drifting daily, it became hard to keep track of all the open PRs and became even harder to maintain a good review quality, my reviews missed a lot of things and were all over the place. And so I wrote <a href="piste.html">Piste</a> an opencode plugin/workflow of sorts that'd pull the PR, go thoroughly across the changes, and dispatched reviewers and verifiers across all its findings, I'd also have to test the branch locally by running the app, that way we can guarantee that code, UI, and UX are all good before we approve it.</p>
+<p>Piste ran on 41 of my 48 review passes inside the internship window. Across my 61 passes on the repo, 27 ended in an approval, 22 in a change request and 12 in comments only. It carried matching v2, the trip types rework, the score floor and the security rules test suite.</p>
+<h1 id="stack">Stack</h1>
+<p>React Native, Expo, TypeScript, Firebase (Auth, Firestore, Cloud Functions), Git and GitHub review.</p>
+<h1 id="screenshots">Screenshots</h1>
+<div style="text-align:center"><img src="../assets/images/projects/frostlink/wizard-1.jpg" width="230" style="display:inline-block;margin:6px" alt="Trip creation, step 1"> <img src="../assets/images/projects/frostlink/wizard-2.jpg" width="230" style="display:inline-block;margin:6px" alt="Step 2, dates and location"> <img src="../assets/images/projects/frostlink/wizard-3a.jpg" width="230" style="display:inline-block;margin:6px" alt="Step 3, visibility and filters"> <img src="../assets/images/projects/frostlink/wizard-3b.jpg" width="230" style="display:inline-block;margin:6px" alt="Step 3, scrolled to the rest"> <img src="../assets/images/projects/frostlink/match-hub.jpg" width="230" style="display:inline-block;margin:6px" alt="Match hub, scores and reasons"> <img src="../assets/images/projects/frostlink/trip-details.jpg" width="230" style="display:inline-block;margin:6px" alt="Trip details, not joined"> <img src="../assets/images/projects/frostlink/chat.jpg" width="230" style="display:inline-block;margin:6px" alt="Chats and direct messages"> <img src="../assets/images/projects/frostlink/profile.jpg" width="230" style="display:inline-block;margin:6px" alt="Profile, gear and riding preferences"></div>
+</article>
+
+        </main>
+        <footer>
+            <p>&copy; 2026 Amen Allah Ben Aissa</p>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" onclick="scrollToTop()">
+        Back to top
+    </button>
+
+    <!-- JavaScript for Back to Top Button -->
+    <script>
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var btn = document.getElementById("back-to-top-btn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script data-goatcounter="https://logmoon.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
