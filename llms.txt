@@ -56,6 +56,7 @@ Multidisciplinary preparatory program in mathematics, physics and computer scien
 
 ## Certifications
 - Building Transformer-Based Natural Language Processing Applications - NVIDIA (Oct 2026) - [https://learn.nvidia.com/certificates?id=V7aGcctBSbiRVU0ZWFwzUQ](https://learn.nvidia.com/certificates?id=V7aGcctBSbiRVU0ZWFwzUQ)
+- AWS Academy Graduate - Cloud Foundations - Amazon Web Services (AWS) (Nov 2026) - [https://www.credly.com/badges/63333214-1d39-4a84-a69a-92843cf540ae/public_url](https://www.credly.com/badges/63333214-1d39-4a84-a69a-92843cf540ae/public_url)
 - Hedera Certified Developer Associate (HCDA), Foundation (HCF) and Business Foundation (HBF) - Hedera Hashgraph (Oct 2026) - [https://certs.hashgraphdev.com/5fd31f8f-16b5-46dc-b8ba-9915ea991d08.pdf?v=e079e671](https://certs.hashgraphdev.com/5fd31f8f-16b5-46dc-b8ba-9915ea991d08.pdf?v=e079e671)
 
 
