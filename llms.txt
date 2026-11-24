@@ -14,7 +14,7 @@ I'm a software engineer and data science student driven by curiosity about how s
 - Machine Learning: PyTorch, LangChain, NLP, RAG, Multi-Agent AI, BERT
 - Data & Analytics: Pandas, NumPy, Power BI, Row-Level Security, Data Visualization
 - Tools & DevOps: Git, GitHub, Docker, Linux, REST APIs, CI/CD, Netlify
-- Spoken Languages: Arabic (Native), French (Fluent), English (Fluent)
+- Spoken Languages: Arabic (Native), French (B2 Professional working proficiency), English (Fluent)
 
 
 ## Experience
